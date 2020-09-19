@@ -7,10 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -29,5 +26,10 @@ public class UsersController {
         UserData createdUser = userService.createUser(userData);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(modelMapper.map(createdUser, UserWsDto.class));
+    }
+
+    @GetMapping("/status")
+    public String createUser() {
+        return "Secured";
     }
 }
