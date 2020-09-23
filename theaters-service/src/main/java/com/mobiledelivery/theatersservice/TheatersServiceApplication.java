@@ -1,4 +1,4 @@
-package com.cinema.booking.moviesservice;
+package com.mobiledelivery.theatersservice;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
@@ -10,10 +10,10 @@ import static org.modelmapper.convention.MatchingStrategies.STRICT;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class MoviesServiceApplication {
+public class TheatersServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MoviesServiceApplication.class, args);
+        SpringApplication.run(TheatersServiceApplication.class, args);
     }
 
     @Bean
@@ -22,5 +22,4 @@ public class MoviesServiceApplication {
         modelMapper.getConfiguration().setMatchingStrategy(STRICT);
         return modelMapper;
     }
-
 }
