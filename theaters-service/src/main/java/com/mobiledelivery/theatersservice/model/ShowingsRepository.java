@@ -7,5 +7,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ShowingsRepository extends CrudRepository<ShowingEntity, Long> {
-    List<ShowingEntity> findAllByMovieIdAndDate(String movieId, LocalDate date);
+    List<ShowingEntity> findAllByMovieIdAndDateAndHallTheaterId(long movieId, LocalDate date, long theaterId);
 }

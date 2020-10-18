@@ -24,15 +24,17 @@ public class ShowingsServiceImpl implements ShowingsService {
     }
 
     @Override
-    public List<ShowingData> findAll(String movieId, LocalDate date) {
-        return ObjectMapperUtils.mapAll(showingsRepository.findAllByMovieIdAndDate(movieId, date), ShowingData.class);
+    public List<ShowingData> findAll(long movieId, LocalDate date, long theaterId) {
+        return ObjectMapperUtils
+                .mapAll(showingsRepository.findAllByMovieIdAndDateAndHallTheaterId(movieId, date, theaterId),
+                        ShowingData.class);
     }
 
     @Override
     public ShowingData findById(long id) {
         Optional<ShowingEntity> showingEntity = showingsRepository.findById(id);
 
-        if(showingEntity.isPresent())
+        if (showingEntity.isEmpty())
             throw new EntityNotFoundException("Showing not found by id " + id);
 
         return ObjectMapperUtils.map(showingEntity.get(), ShowingData.class);

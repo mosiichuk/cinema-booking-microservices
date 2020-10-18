@@ -9,6 +9,7 @@ import com.mobiledelivery.theatersservice.services.data.TheaterData;
 import com.mobiledelivery.theatersservice.services.TheatersService;
 import com.mobiledelivery.theatersservice.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ public class TheatersController {
     private TheatersService theatersService;
     private MoviesService moviesService;
     private ShowingsService showingsService;
-    
+
     @Autowired
     public TheatersController(TheatersService theatersService,
                               MoviesService moviesService,
@@ -42,13 +43,15 @@ public class TheatersController {
     }
 
     @GetMapping("/{theaterId}/movies")
-    public List<MovieWsDto> getMovies(@RequestParam boolean active) {
-        return ObjectMapperUtils.mapAll(moviesService.findMovies(active), MovieWsDto.class);
+    public List<MovieWsDto> getMovies(@RequestParam boolean active, @PathVariable long theaterId) {
+        return ObjectMapperUtils.mapAll(moviesService.findMoviesByTheaterId(active, theaterId), MovieWsDto.class);
     }
 
     @GetMapping("/{theaterId}/showings")
-    public List<ShowingWsDto> getMovies(@RequestParam String movieId, @RequestParam LocalDate date) {
-        return ObjectMapperUtils.mapAll(showingsService.findAll(movieId, date), ShowingWsDto.class);
+    public List<ShowingWsDto> getShowings(@RequestParam long movieId,
+                                          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam LocalDate date,
+                                        @PathVariable long theaterId) {
+        return ObjectMapperUtils.mapAll(showingsService.findAll(movieId, date, theaterId), ShowingWsDto.class);
     }
 
     @GetMapping("/{theaterId}/showings/{showingId}")

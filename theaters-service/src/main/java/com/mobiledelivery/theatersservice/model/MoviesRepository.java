@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface MoviesRepository extends CrudRepository<MovieEntity, Long> {
     List<MovieEntity> findAllByActive(boolean active);
+    List<MovieEntity> findAllByActiveAndShowingsHallTheaterId(boolean active, long theaterId);
 }

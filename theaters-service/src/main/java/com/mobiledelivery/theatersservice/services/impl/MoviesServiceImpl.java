@@ -22,4 +22,9 @@ public class MoviesServiceImpl implements MoviesService {
     public List<MovieData> findMovies(boolean active) {
         return ObjectMapperUtils.mapAll(moviesRepository.findAllByActive(active), MovieData.class);
     }
+
+    @Override
+    public List<MovieData> findMoviesByTheaterId(boolean active, long theaterId) {
+        return ObjectMapperUtils.mapAll(moviesRepository.findAllByActiveAndShowingsHallTheaterId(active, theaterId), MovieData.class);
+    }
 }
