@@ -1,0 +1,35 @@
+version: '3'
+services:
+  discovery:
+    image: kuroiumi/eureka-discovery
+    ports:
+      - 8010:8010
+  api-gateway:
+    image: kuroiumi/zuul-api-gateway
+    environment:
+      - EUREKA_SERVER=http://discovery:8010/eureka
+    depends_on:
+      - discovery
+    ports:
+      - 8011:8011
+  theaters-service:
+    image: kuroiumi/theaters-service
+    environment:
+      - EUREKA_SERVER=http://discovery:8010/eureka
+    depends_on:
+      - api-gateway
+      - discovery
+  movies-service:
+    image: kuroiumi/movies-service
+    environment:
+      - EUREKA_SERVER=http://discovery:8010/eureka
+    depends_on:
+      - api-gateway
+      - discovery
+  users-service:
+    image: kuroiumi/users-service
+    environment:
+      - EUREKA_SERVER=http://discovery:8010/eureka
+    depends_on:
+      - api-gateway
+      - discovery
