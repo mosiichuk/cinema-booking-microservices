@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,14 +20,19 @@ public class MoviesServiceImpl implements MoviesService {
     public MovieEntity findMovieById(Long id) {
         Optional<MovieEntity> movieById = moviesRepository.findById(id);
 
-        if (!movieById.isPresent())
+        if (movieById.isEmpty())
             throw new EntityNotFoundException("Movie for id: " + id + " not found");
 
         return movieById.get();
     }
 
     @Override
-    public List<MovieEntity> findMoviesByIds(List<Long> ids) {
-        return moviesRepository.findByIdIn(ids);
+    public List<MovieEntity> findMoviesByIds(List<Long> ids, LocalDate afterDate) {
+        return moviesRepository.findByIdInAndReleaseDateAfterOrderByReleaseDateDesc(ids, afterDate);
+    }
+
+    @Override
+    public List<MovieEntity> findAll() {
+        return moviesRepository.findAll();
     }
 }

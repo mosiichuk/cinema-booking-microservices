@@ -115,70 +115,70 @@ INSERT INTO SEATS (ROW_NUMBER, SEAT_NUMBER, SEAT_TYPE, HALL_ID) VALUES ('4', '3'
 INSERT INTO MOVIES (ID, NAME, IMG_URL, GENRES, ACTIVE) VALUES (
 '1',
 'Blade runner 2049',
-'http://localhost:4000/soon1.png',
+'http://localhost:4000/movie1.png',
 'Biography/Crime/Drama',
 'true');
 
 INSERT INTO MOVIES (ID, NAME, IMG_URL, GENRES, ACTIVE) VALUES (
 '2',
 'Attack on Titan',
-'http://localhost:4000/soon2.png',
+'http://localhost:4000/movie2.png',
 'Biography/Crime/Drama',
 'true');
 
 INSERT INTO MOVIES (ID, NAME, IMG_URL, GENRES, ACTIVE) VALUES (
 '3',
 'Monster',
-'http://localhost:4000/soon3.png',
+'http://localhost:4000/movie3.png',
 'Biography/Crime/Drama',
 'true');
 
 INSERT INTO MOVIES (ID, NAME, IMG_URL, GENRES, ACTIVE) VALUES (
 '4',
 'March Comes in like a lion',
-'http://localhost:4000/soon4.png',
+'http://localhost:4000/movie3.png',
 'Biography/Crime/Drama',
 'true');
 
 INSERT INTO MOVIES (ID, NAME, IMG_URL, GENRES, ACTIVE) VALUES (
 '5',
 'Reservoir Dogs',
-'http://localhost:4000/soon5.png',
+'http://localhost:4000/movie3.png',
 'Biography/Crime/Drama',
 'true');
 
 INSERT INTO MOVIES (ID, NAME, IMG_URL, GENRES, ACTIVE) VALUES (
 '6',
 'Nier Automata',
-'http://localhost:4000/soon6.png',
+'http://localhost:4000/movie3.png',
 'Biography/Crime/Drama',
 'true');
 
 INSERT INTO MOVIES (ID, NAME, IMG_URL, GENRES, ACTIVE) VALUES (
 '7',
 'The Heteful Eight',
-'http://localhost:4000/soon7.png',
+'http://localhost:4000/movie3.png',
 'Biography/Crime/Drama',
 'true');
 
 INSERT INTO MOVIES (ID, NAME, IMG_URL, GENRES, ACTIVE) VALUES (
 '8',
 'Django Unchained',
-'http://localhost:4000/soon8.png',
+'http://localhost:4000/movie3.png',
 'Biography/Crime/Drama',
 'true');
 
 INSERT INTO MOVIES (ID, NAME, IMG_URL, GENRES, ACTIVE) VALUES (
 '9',
 'Evangelion',
-'http://localhost:4000/soon9.png',
+'http://localhost:4000/movie3.png',
 'Biography/Crime/Drama',
 'true');
 
 INSERT INTO MOVIES (ID, NAME, IMG_URL, GENRES, ACTIVE) VALUES (
 '10',
 'The Heteful Eight',
-'http://localhost:4000/soon10.png',
+'http://localhost:4000/movie3.png',
 'Biography/Crime/Drama',
 'true');
 

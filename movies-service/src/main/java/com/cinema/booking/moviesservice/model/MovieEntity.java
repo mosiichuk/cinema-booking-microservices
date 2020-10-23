@@ -4,9 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -25,7 +25,7 @@ public class MovieEntity {
     private String starring;
     private String director;
     private String writtenBy;
-    private String releaseDate;
+    private LocalDate releaseDate;
     private String movieTiming;
     private String ageLimit;
     private String synopsis;

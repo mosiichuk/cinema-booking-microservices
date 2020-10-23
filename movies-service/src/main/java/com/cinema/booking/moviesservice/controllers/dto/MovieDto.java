@@ -3,6 +3,8 @@ package com.cinema.booking.moviesservice.controllers.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 public class MovieDto {
@@ -17,7 +19,7 @@ public class MovieDto {
     private String starring;
     private String director;
     private String writtenBy;
-    private String releaseDate;
+    private LocalDate releaseDate;
     private String movieTiming;
     private String ageLimit;
     private String synopsis;
