@@ -1,12 +1,14 @@
 package com.mobiledelivery.theatersservice.controllers;
 
+import com.mobiledelivery.theatersservice.controllers.dto.HallWsDto;
 import com.mobiledelivery.theatersservice.controllers.dto.MovieWsDto;
 import com.mobiledelivery.theatersservice.controllers.dto.ShowingWsDto;
 import com.mobiledelivery.theatersservice.controllers.dto.TheaterWsDto;
+import com.mobiledelivery.theatersservice.services.HallsService;
 import com.mobiledelivery.theatersservice.services.MoviesService;
 import com.mobiledelivery.theatersservice.services.ShowingsService;
-import com.mobiledelivery.theatersservice.services.data.TheaterData;
 import com.mobiledelivery.theatersservice.services.TheatersService;
+import com.mobiledelivery.theatersservice.services.data.TheaterData;
 import com.mobiledelivery.theatersservice.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,14 +28,17 @@ public class TheatersController {
     private TheatersService theatersService;
     private MoviesService moviesService;
     private ShowingsService showingsService;
+    private HallsService hallsService;
 
     @Autowired
     public TheatersController(TheatersService theatersService,
                               MoviesService moviesService,
-                              ShowingsService showingsService) {
+                              ShowingsService showingsService,
+                              HallsService hallsService) {
         this.theatersService = theatersService;
         this.moviesService = moviesService;
         this.showingsService = showingsService;
+        this.hallsService = hallsService;
     }
 
     @GetMapping
@@ -50,12 +55,19 @@ public class TheatersController {
     @GetMapping("/{theaterId}/showings")
     public List<ShowingWsDto> getShowings(@RequestParam long movieId,
                                           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam LocalDate date,
-                                        @PathVariable long theaterId) {
+                                          @PathVariable long theaterId) {
         return ObjectMapperUtils.mapAll(showingsService.findAll(movieId, date, theaterId), ShowingWsDto.class);
     }
 
     @GetMapping("/{theaterId}/showings/{showingId}")
     public ShowingWsDto getMovies(@PathVariable long showingId) {
         return ObjectMapperUtils.map(showingsService.findById(showingId), ShowingWsDto.class);
+    }
+
+    @GetMapping("/{theaterId}/halls")
+    public List<HallWsDto> getHalls(@RequestParam long movieId,
+                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam LocalDate date,
+                                     @PathVariable long theaterId) {
+        return ObjectMapperUtils.mapAll(hallsService.findAllBy(movieId, date, theaterId), HallWsDto.class);
     }
 }

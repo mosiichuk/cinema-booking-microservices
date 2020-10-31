@@ -2,9 +2,12 @@ package com.mobiledelivery.theatersservice.model.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +21,7 @@ import java.time.LocalDate;
 public class ShowingEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private LocalDate date;
@@ -26,9 +30,11 @@ public class ShowingEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "movieId", nullable = false)
+    @ToString.Exclude
     private MovieEntity movie;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "hallId", nullable = false)
+    @ToString.Exclude
     private HallEntity hall;
 }

@@ -2,6 +2,7 @@ package com.mobiledelivery.theatersservice.model.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,13 +28,16 @@ public class HallEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "theaterId", nullable = false)
+    @ToString.Exclude
     private TheaterEntity theater;
 
     @OneToMany(mappedBy = "hall", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
+    @ToString.Exclude
     private Set<SeatEntity> seats;
 
     @OneToMany(mappedBy = "hall", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private List<ShowingEntity> showing;
+    @ToString.Exclude
+    private List<ShowingEntity> showings;
 }

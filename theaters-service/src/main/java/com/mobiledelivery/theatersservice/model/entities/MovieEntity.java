@@ -2,6 +2,7 @@ package com.mobiledelivery.theatersservice.model.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,6 +31,7 @@ public class MovieEntity {
 
     @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<ShowingEntity> showings;
 }
 

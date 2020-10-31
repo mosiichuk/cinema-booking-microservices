@@ -4,20 +4,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class ShowingWsDto implements Serializable {
+public class HallWsDto implements Serializable {
 
     private static final long serialVersionUID = -9135173507608150625L;
 
     private long id;
-
-    private LocalDate date;
-
-    private String showTime;
-
-    private MovieWsDto movie;
-
+    private String name;
+    private List<ShowingWsDto> showings;
 }
