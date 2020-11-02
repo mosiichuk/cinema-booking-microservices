@@ -2,32 +2,24 @@ package com.mobiledelivery.theatersservice.model.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "seats")
+@Table(name = "reservations")
 @Data
 @NoArgsConstructor
-public class SeatEntity {
-
+public class ReservationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private int rowNumber;
+    private boolean reserved;
 
-    private int seatNumber;
+    private String userId;
 
-    @Enumerated(EnumType.STRING)
-    private SeatType seatType;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "hallId", nullable = false)
-    @ToString.Exclude
-    private HallEntity hall;
+    private boolean paid;
 
     @OneToMany(mappedBy = "showing", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)

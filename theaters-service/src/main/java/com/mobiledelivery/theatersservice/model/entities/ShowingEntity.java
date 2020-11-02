@@ -4,15 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "showings")
@@ -37,4 +31,8 @@ public class ShowingEntity {
     @JoinColumn(name = "hallId", nullable = false)
     @ToString.Exclude
     private HallEntity hall;
+
+    @OneToMany(mappedBy = "showing", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<SeatReservation> seatReservations;
 }
