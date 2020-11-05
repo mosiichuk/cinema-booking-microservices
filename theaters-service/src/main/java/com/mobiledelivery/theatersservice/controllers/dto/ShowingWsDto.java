@@ -20,4 +20,6 @@ public class ShowingWsDto implements Serializable {
 
     private MovieWsDto movie;
 
+    private HallWsDto hall;
+
 }

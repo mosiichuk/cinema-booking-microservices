@@ -12,5 +12,4 @@ public interface SeatRepository extends CrudRepository<SeatEntity, Long> {
             "JOIN ShowingEntity AS sh ON sh.hall.id = h.id " +
             "WHERE sh.id = ?1")
     List<SeatEntity> findByShowingId(long showingId);
-
 }

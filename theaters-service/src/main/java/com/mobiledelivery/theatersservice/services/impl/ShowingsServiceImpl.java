@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,9 @@ public class ShowingsServiceImpl implements ShowingsService {
         if (showingEntity.isEmpty())
             throw new EntityNotFoundException("Showing not found by id " + id);
 
-        return ObjectMapperUtils.map(showingEntity.get(), ShowingData.class);
+        ShowingEntity showing = showingEntity.get();
+        showing.getHall().setShowings(Collections.emptyList());
+
+        return ObjectMapperUtils.map(showing, ShowingData.class);
     }
 }

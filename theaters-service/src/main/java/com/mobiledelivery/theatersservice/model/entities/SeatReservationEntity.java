@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "seatReservations")
 @Data
 @NoArgsConstructor
-public class SeatReservation {
+public class SeatReservationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +26,9 @@ public class SeatReservation {
     @ToString.Exclude
     private ShowingEntity showing;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "reservationId", nullable = false)
-    @ToString.Exclude
-    private ReservationEntity reservation;
+    private boolean reserved;
+
+    private String userId;
+
+    private boolean paid;
 }

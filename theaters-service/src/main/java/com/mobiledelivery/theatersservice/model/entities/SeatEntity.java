@@ -31,5 +31,6 @@ public class SeatEntity {
 
     @OneToMany(mappedBy = "showing", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private Set<SeatReservation> seatReservations;
+    @ToString.Exclude
+    private Set<SeatReservationEntity> seatReservations;
 }

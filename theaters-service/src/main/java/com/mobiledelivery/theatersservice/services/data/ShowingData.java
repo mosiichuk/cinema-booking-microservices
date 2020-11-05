@@ -16,4 +16,6 @@ public class ShowingData {
 
     private MovieData movie;
 
+    private HallData hall;
+
 }

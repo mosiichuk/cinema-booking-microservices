@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,9 +22,12 @@ public class HallsServiceImpl implements HallsService {
 
     @Override
     public List<HallData> findAllBy(long movieId, LocalDate date, long theaterId) {
-        return ObjectMapperUtils
+        List<HallData> hallData = ObjectMapperUtils
                 .mapAll(hallsRepository.findAllByTheaterIdAndShowingsDate(theaterId, date),
                         HallData.class);
+
+        hallData.forEach(hall -> hall.getShowings().forEach(showingData -> showingData.setHall(null)));
+        return hallData;
     }
 }
 
