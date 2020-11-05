@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class HallWsDto implements Serializable {
-
     private static final long serialVersionUID = -9135173507608150625L;
 
     private long id;

@@ -9,17 +9,12 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 public class ShowingWsDto implements Serializable {
-
     private static final long serialVersionUID = -9135173507608150625L;
 
     private long id;
-
     private LocalDate date;
-
     private String showTime;
-
     private MovieWsDto movie;
-
     private HallWsDto hall;
 
 }

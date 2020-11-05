@@ -28,7 +28,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, environment.getProperty("api.user.registration.url")).permitAll()
                 .antMatchers(environment.getProperty("api.theaters")).permitAll()
                 .antMatchers(environment.getProperty("api.movies")).permitAll()
-                .antMatchers(environment.getProperty("api.reservations"), "/reservations").permitAll()
+                .antMatchers(environment.getProperty("api.reservations")).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new AuthorizationFilter(authenticationManager(), environment));;

@@ -30,7 +30,8 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 
         String authorizationHeader = req.getHeader(environment.getProperty("authorization.token.header.name"));
 
-        if (authorizationHeader == null || !authorizationHeader.startsWith(environment.getProperty("authorization.token.header.prefix"))) {
+        if (authorizationHeader == null ||
+                !authorizationHeader.startsWith(environment.getProperty("authorization.token.header.prefix"))) {
             chain.doFilter(req, res);
             return;
         }
@@ -44,22 +45,23 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest req) {
         String authorizationHeader = req.getHeader(environment.getProperty("authorization.token.header.name"));
 
-        if (authorizationHeader == null) {
+        if (authorizationHeader == null)
             return null;
-        }
 
         String token = authorizationHeader.replace(environment.getProperty("authorization.token.header.prefix"), "");
+        String userId = extractUserId(token);
 
-        String userId = Jwts.parser()
+        if (userId == null)
+            return null;
+
+        return new UsernamePasswordAuthenticationToken(userId, null, new ArrayList<>());
+    }
+
+    private String extractUserId(String token) {
+        return Jwts.parser()
                 .setSigningKey(environment.getProperty("token.secret"))
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
-
-        if (userId == null) {
-            return null;
-        }
-
-        return new UsernamePasswordAuthenticationToken(userId, null, new ArrayList<>());
     }
 }

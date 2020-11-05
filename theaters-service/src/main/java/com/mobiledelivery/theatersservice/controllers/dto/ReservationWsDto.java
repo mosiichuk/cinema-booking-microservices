@@ -1,5 +1,6 @@
 package com.mobiledelivery.theatersservice.controllers.dto;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,10 +13,11 @@ public class ReservationWsDto implements Serializable {
 
     private long id;
 
+    @NotNull
     private long seatId;
-
+    @NotNull
     private long showingId;
-
+    @NotNull
     private boolean reserved;
 
     private String userId;

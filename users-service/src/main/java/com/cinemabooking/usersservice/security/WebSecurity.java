@@ -2,7 +2,6 @@ package com.cinemabooking.usersservice.security;
 
 import com.cinemabooking.usersservice.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -40,7 +39,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(usersService).passwordEncoder(bCryptPasswordEncoder);
+        auth
+                .userDetailsService(usersService)
+                .passwordEncoder(bCryptPasswordEncoder);
     }
 
     private AuthenticationFilter getAuthFilter() throws Exception {

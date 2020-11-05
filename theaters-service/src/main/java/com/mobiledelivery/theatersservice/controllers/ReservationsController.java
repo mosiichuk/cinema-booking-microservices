@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/reservations")
 public class ReservationsController {
-    @Autowired
     private ReservationsService reservationsService;
+    private ModelMapper modelMapper;
 
     @Autowired
-    private ModelMapper modelMapper;
+    public ReservationsController(ReservationsService reservationsService, ModelMapper modelMapper) {
+        this.reservationsService = reservationsService;
+        this.modelMapper = modelMapper;
+    }
 
     @PostMapping
     public ReservationWsDto createReservation(@RequestBody ReservationWsDto reservationWsDto) {
