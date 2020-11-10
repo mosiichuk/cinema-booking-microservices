@@ -26,7 +26,7 @@ const SelectSessionSection = ({movieId}) => {
     const [halls, setHalls] = useState([]);
 
     useEffect(() => {
-        fetch(`/theaters/${state.theater.id}/halls?movieId=${movieId}&date=${sessionDate}`)
+        fetch(`/api/theaters/${state.theater.id}/halls?movieId=${movieId}&date=${sessionDate}`)
             .then(data => data.json())
             .then(data => setHalls(data));
     }, [sessionDate, state.theater.id]);

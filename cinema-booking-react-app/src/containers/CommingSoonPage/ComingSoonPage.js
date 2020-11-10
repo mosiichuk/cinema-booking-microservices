@@ -8,7 +8,7 @@ const ComingSoonPage = () => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        fetch(`/movies`)
+        fetch(`/api/movies`)
             .then(data => data.json())
             .then(movies => {
                 const moviesForDate = new Map();

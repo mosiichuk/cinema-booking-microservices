@@ -18,7 +18,7 @@ const OrderTicketsSection = () => {
     const {showingId} = useParams();
 
     useEffect(() => {
-        fetch(`/theaters/${appState.theater.id}/showings/${showingId}/seats`)
+        fetch(`/api/theaters/${appState.theater.id}/showings/${showingId}/seats`)
             .then(data => data.json())
             .then(data => setSeats(prepateSeatsForView(data)));
     }, []);

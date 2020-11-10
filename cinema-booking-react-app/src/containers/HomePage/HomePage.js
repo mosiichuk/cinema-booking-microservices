@@ -12,7 +12,7 @@ const HomePage = () => {
     const [appState] = useAppContext();
 
     useEffect(() => {
-        fetch(`/theaters/${appState.theater.id}/movies?active=true`)
+        fetch(`/api/theaters/${appState.theater.id}/movies?active=true`)
             .then(response => response.json())
             .then((data) => {
                 setSlides(data);

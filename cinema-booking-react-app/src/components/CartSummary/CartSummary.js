@@ -13,7 +13,7 @@ const CartSummary = () => {
     const appState = useAppState();
 
     useEffect(() => {
-        fetch(`/theaters/${appState.theater.id}/showings/${showingId}`)
+        fetch(`/api/theaters/${appState.theater.id}/showings/${showingId}`)
             .then(data => data.json())
             .then(data => setShowing(data));
     }, []);

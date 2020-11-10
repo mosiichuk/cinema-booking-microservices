@@ -9,7 +9,7 @@ const LocationSelector = () => {
     const [theaters, setTheaters] = useState();
 
     useEffect(() => {
-        fetch(`/theaters`)
+        fetch(`/api/theaters`)
             .then(data => data.json())
             .then(data => setTheaters(data));
     }, []);
