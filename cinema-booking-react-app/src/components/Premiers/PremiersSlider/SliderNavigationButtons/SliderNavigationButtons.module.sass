@@ -1,0 +1,27 @@
+@import 'Assets/styles/variables'
+
+.SliderNavigationItem
+  width: 75px
+  text-align: center
+  text-transform: uppercase
+  user-select: none
+
+.SliderNavigationButtons
+  display: flex
+  width: 170px
+  justify-content: space-between
+
+.SliderNavigationButton
+  width: 75px
+  height: 75px
+  border-radius: 50%
+  display: flex
+  justify-content: center
+  align-items: center
+  cursor: pointer
+  margin-bottom: 10px
+  background: $black-bg-light
+  transition: background-color 0.5s ease
+
+  &:hover
+    background: $accent

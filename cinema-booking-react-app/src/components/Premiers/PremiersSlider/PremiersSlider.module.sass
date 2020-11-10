@@ -1,0 +1,33 @@
+@import 'Assets/styles/variables'
+
+.Premier
+  width: 760px
+  position: relative
+
+  &:hover
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))
+
+    & .PremierDescription
+      opacity: 1
+
+    & .PremierImage
+      filter: brightness(0.35)
+
+.PremierDescription
+  position: absolute
+  left: 10%
+  top: 50%
+  transform: translateY(-50%)
+  opacity: 0
+  transition: opacity 0.5s ease
+  color: $text-white
+
+  & p
+    text-transform: uppercase
+    margin-bottom: 10px
+
+  & h2
+    font-weight: bold
+
+.PremierImage
+  transition: 0.5s filter ease, 0.5s -webkit-filter ease

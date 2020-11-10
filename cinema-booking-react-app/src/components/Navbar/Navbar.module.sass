@@ -1,0 +1,49 @@
+@import "Assets/styles/mixins/breakpoints"
+@import "Assets/styles/mixins/util"
+@import "Assets/styles/variables"
+
+.Nav
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    z-index: 1
+    background: rgba(10, 10, 10, 0.7)
+    border-bottom: 2px solid rgba(196, 196, 196, 0.1)
+
+    +screen-down(xl)
+        padding: 25px 0
+
+.MenuItem
+    margin-right: 28px
+
+    +screen-down(lg)
+        margin-right: 17px
+
+    +screen-down(sm)
+        margin-bottom: 15px
+
+    &:last-child
+        margin-right: 0
+
+
+.MenuLink
+    text-transform: uppercase
+    color: $text-grey
+
+    +screen-down(md)
+        +fs(15px)
+
+    &:hover
+        color: $accent
+
+
+.NavbarUserActionItems
+    display: flex
+    align-items: center
+    margin-right: 30px
+    color: $text-white
+
+
+    &:last-child
+        margin-right: 0

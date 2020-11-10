@@ -1,0 +1,144 @@
+@import "Assets/styles/mixins/breakpoints"
+@import "Assets/styles/mixins/util"
+@import "Assets/styles/mixins/reset"
+@import "Assets/styles/variables"
+
+.Backdrop
+  position: absolute
+  z-index: 1
+  width: 100%
+  height: 100vh
+  background-color: rgba(38, 38, 38, 0.5)
+  cursor: pointer
+
+.Popup
+  z-index: 1
+  width: 49%
+  height: 75%
+  +abs-center
+  cursor: auto
+
+  +screen-down(lg)
+    width: 40%
+  +screen-down(md)
+    width: 55%
+  +screen-down(sm)
+    width: 90%
+
+.LoginOptions
+  position: relative
+  height: 100%
+  background-color: $black-bg
+
+  & > img
+    position: absolute
+    top: 0
+    left: 0
+    max-width: 50%
+    height: 100%
+
+  &__label
+    +abs-center
+    width: 78px
+    height: 78px
+    background-color: $accent
+    border-radius: 50%
+    color: $black-bg
+    display: flex
+    align-items: center
+    justify-content: center
+    z-index: 2
+
+.Messages
+
+  & p
+    color: $text-white
+    font-size: 17px
+
+  & span
+    color: $accent
+
+.FormSwitcher
+
+  & > p
+    cursor: pointer
+    font-size: 18px
+    width: 80px
+    height: 30px
+    border: 1px solid $accent
+    padding: 7px
+    color: white
+
+  &Active
+    background: $accent
+
+.FormsContainer
+  padding: 2%
+  position: absolute
+  top: 0
+  right: 0
+  width: 50%
+  height: 100%
+
+  +screen-down(xl)
+    width: 100%
+
+.AuthForm
+
+  & h3
+    color: $text-white
+    margin: 32px 0
+    text-transform: uppercase
+
+  & input
+    margin-bottom: 15px
+    width: 70%
+    height: 50px
+    outline: none
+    padding: 16px 0 16px 14px
+    background-color: transparent
+    border: 3px solid rgba(182, 97, 252, 0.43)
+    color: $text-white
+
+    &::placeholder
+      color: $accent
+
+    & a
+      color: $text-grey
+
+.Button
+  +reset-button-style()
+  display: block
+  text-transform: uppercase
+  color: $black-bg
+  width: 70%
+  height: 50px
+  background-color: $accent
+  border-radius: 0
+  margin: 50px auto 12px
+
+  &:hover,
+  &:focus,
+  &:active
+    outline: none
+    background-color: $accent
+
+  &:active
+    transform: translateY(4px)
+
+.card-body
+
+  & .card-btn
+    width: 80px
+    height: 30px
+    border: 1px solid $accent
+    padding: 7px
+    color: white
+
+    &-act
+
+  & .login-label
+    position: absolute
+
+    p
+      width: 40px

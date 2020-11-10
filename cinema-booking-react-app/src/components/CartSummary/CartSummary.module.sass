@@ -1,0 +1,95 @@
+@import '../../assets/styles/variables'
+@import '../../assets/styles/mixins/breakpoints'
+@import '../../assets/styles/mixins/reset'
+
+.CartSummary
+  max-width: 663px
+  height: auto
+  margin: 0 auto
+
+  +screen-down(xl)
+    margin-top: 50px
+
+  & h3
+    color: $text-white
+    margin-bottom: 23px
+
+.Tickets
+  padding: 31px 0
+  color: $text-white
+  max-width: 663px
+  height: auto
+  background: $black-bg-md
+  margin: 0 auto
+  display: flex
+  justify-content: center
+  align-items: center
+
+  &Table
+    width: 100%
+    max-width: 572px
+
+  &Desc
+    margin: 50px 0 30px 0
+
+    &:last-child
+      margin-right: 0
+
+  &Icon
+    width: 20px
+    height: 20px
+
+    &Location
+      width: 14px
+
+  & p
+    margin-left: 19px
+
+  &Details
+    margin-bottom: 61px
+
+    &Heading
+      max-width: 572px
+      height: 75px
+      background: $black-bg-light
+      display: flex
+      justify-content: space-around
+      align-items: center
+
+  &Info
+    max-width: 572px
+    height: auto
+    display: flex
+    justify-content: space-around
+    margin: auto auto
+
+    & p
+      margin: 30px 0
+
+.BuyButton
+  +reset-button-style()
+  text-transform: uppercase
+  color: $black-bg
+  width: 255px
+  height: 65px
+  background: $accent
+  display: flex
+  justify-content: center
+  align-items: center
+
+  &:active, &:hover, &:focus
+    background: $light
+    transition: all 0.3s ease
+    border: none
+    outline: none
+
+  & img
+    margin-right: 25px
+    width: 35px
+    height: 28px
+
+.SummaryDesc
+  margin: auto auto
+
+  & span
+    color: $accent

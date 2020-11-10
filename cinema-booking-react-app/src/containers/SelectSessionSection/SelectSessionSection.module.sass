@@ -1,0 +1,74 @@
+@import 'Assets/styles/variables'
+@import 'Assets/styles/mixins/breakpoints'
+
+.SelectSessionsSection
+  color: $text-white
+
+.HeaderRow
+  display: flex
+  justify-content: space-between
+  padding: 65px 10px
+
+.DateSelector
+  color: $accent
+  background-color: transparent
+  border: none
+  cursor: pointer
+
+  & option
+    background-color: transparent
+
+  &:focus, &:active, &:visited
+    border: none
+    outline: none
+
+.SessionsRow
+  height: 40px
+  box-sizing: border-box
+  display: flex
+  align-items: center
+  border: 1px solid $text-grey
+  border-right: none
+  border-left: none
+
+  +screen-down(md)
+    border-right: 1px solid $text-grey
+    border-left: 1px solid $text-grey
+    border-top: none
+    border-bottom: none
+    flex-direction: column
+    height: 500px
+
+  & > div
+    flex: 1 1 0
+    display: flex
+    justify-content: center
+
+    +screen-down(md)
+      width: 100px
+      align-items: center
+
+  & > div:nth-child(1)
+    justify-content: start
+
+    +screen-down(md)
+      width: 100px
+      justify-content: center
+
+.TimeLine
+  border: none
+
+.TimeSlot
+  display: flex
+  align-items: center
+  justify-content: center
+  color: #000000
+  width: 70px
+  height: 25px
+  background-color: #ffffff
+  border-radius: 10px
+  cursor: pointer
+  transition: background-color 0.2s ease-in-out
+
+  &:hover
+    background-color: $accent

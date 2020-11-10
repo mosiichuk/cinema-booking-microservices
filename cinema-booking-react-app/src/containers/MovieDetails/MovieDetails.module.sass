@@ -1,0 +1,63 @@
+@import 'Assets/styles/mixins/breakpoints'
+@import 'Assets/styles/variables'
+
+.MovieDetails
+  padding-top: 75px
+
+.PlayButton
+  width: 120px
+  height: 120px
+  border-radius: 50%
+  background: rgba(0, 0, 0, 0.37)
+  position: relative
+
+.PlayIcon
+  width: 40px
+  height: 50px
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+.MoviePoster
+  width: 100%
+  max-width: 472px
+  height: 100%
+
+  +screen-down(sm)
+    display: none
+
+.MovieDescriptionSection
+  padding: 56px 0
+
+.MovieDescription
+  margin-left: 28px
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  &__title
+    color: $accent
+
+  &__text
+    margin-top: 2px
+
+.Separator
+  border-left: 2px solid $text-grey
+
+  +screen-down(xl)
+    border-left: none
+
+.Synopsis
+
+  +screen-down(lg)
+    margin-top: 50px
+
+.SynopsisText
+  max-width: 564px
+  height: auto
+  margin: 21px auto 0 auto
+
+  & span
+    display: block
+    margin: 21px auto 0 auto

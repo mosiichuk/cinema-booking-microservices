@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'Freight';
+  src: url('../fonts/FreightSansProLight-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Freight';
+  src: url('../fonts/FREIGHT_SANS_BOLD_SC.otf');
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Freight';
+  src: url('../fonts/FREIGHT_SANS_MEDIUM_SC.otf');
+  font-style: normal;
+  font-weight: normal;
+}

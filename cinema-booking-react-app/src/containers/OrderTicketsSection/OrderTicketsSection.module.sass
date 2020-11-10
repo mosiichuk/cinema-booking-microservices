@@ -1,0 +1,92 @@
+@import '../../assets/styles/variables'
+@import '../../assets/styles/mixins/breakpoints'
+@import '../../assets/styles/mixins/reset'
+
+.BookingSection
+  padding: 72px 0
+
+.BookingScreen
+  & img
+    width: 100%
+
+  & h3
+    color: $text-white
+
+  &__row
+    margin-bottom: 17px
+
+    &:last-child
+      margin-bottom: 0
+
+.Seats
+  margin-top: 130px
+
+  &Row
+    display: flex
+    justify-content: center
+    margin-bottom: 17px
+
+    &:last-child
+      margin-bottom: 0
+
+    &Lg
+      display: flex
+      justify-content: space-between
+      margin-top: 85px
+
+  &Sofa
+    width: 63px
+    height: 50px
+    margin-right: 24px
+    cursor: pointer
+    transition: background-image 0.9s ease-in-out
+
+    +screen-down(md)
+      width: 33px
+      height: 28px
+      margin-right: 5px
+
+    &:last-child
+      margin-right: 0
+
+    &Taken
+      background: url('../../assets/icons/sofa-taken.png') no-repeat center center / cover
+      cursor: none
+
+    &Selected
+      background: url('../../assets/icons/sofa-selected.png') no-repeat center center / cover
+
+    &Free
+      background: url('../../assets/icons/sofa-available.png') no-repeat center center / cover
+
+      &:hover
+        background: url('../../assets/icons/sofa-selected.png') no-repeat center center / cover
+
+    &Lg
+      width: 92px
+      height: 50px
+      cursor: pointer
+      transition: background-image 0.9s ease-in-out
+
+      +screen-down(md)
+        width: 55px
+        height: 30px
+
+      &Taken
+        background: url('../../assets/icons/sofa-lg-taken.png') no-repeat center center / cover
+
+      &Selected
+        background: url('../../assets/icons/sofa-lg-selected.png') no-repeat center center / cover
+
+      &Free
+        background: url('../../assets/icons/sofa-lg-available.png') no-repeat center center / cover
+
+  &Prices
+    margin-top: 46px
+    display: flex
+    justify-content: space-around
+
+  &Price
+    margin-left: 11px
+
+

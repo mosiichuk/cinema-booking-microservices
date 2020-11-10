@@ -1,0 +1,65 @@
+@import 'Assets/styles/variables'
+@import 'Assets/styles/mixins/breakpoints'
+
+.ComingSoonSection
+  padding: 90px 0 30px
+
+.section-header
+  color: $text-white
+
+  &__sub
+    text-transform: uppercase
+
+.Header
+  margin-bottom: 30px
+
+  & h3
+    color: $text-white
+
+  & p
+    text-transform: uppercase
+
+.Session
+  margin-bottom: 30px
+
+  &:last-child
+    margin-bottom: 0
+
+  &Date
+    color: $text-white
+    text-align: center
+
+    +screen-up(md)
+      text-align-last: left
+
+  &Day
+    color: $text-white
+    text-align: center
+
+    +screen-up(md)
+      text-align-last: left
+
+.Movie
+
+  &Poster
+    width: 100%
+    height: auto
+    margin-bottom: 15px
+
+  &Card
+    width: 210px
+    color: $text-white
+    text-align: center
+    margin: 0 15px 45px
+
+.MoviesRow
+  background-color: $black-bg-light
+  padding-top: 17px
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+
+  +screen-up(md)
+    justify-content: start
+
+
