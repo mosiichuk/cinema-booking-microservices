@@ -21,14 +21,18 @@ const timeSlots = [
 const SelectSessionSection = ({movieId}) => {
     const dates = getDates();
 
-    const [state, dispatch] = useAppContext();
+    const [state] = useAppContext();
+    const [loading, setLoading] = useState(true);
     const [sessionDate, setSessionDate] = useState(dates[0].date);
     const [halls, setHalls] = useState([]);
 
     useEffect(() => {
         fetch(`/api/theaters/${state.theater.id}/halls?movieId=${movieId}&date=${sessionDate}`)
             .then(data => data.json())
-            .then(data => setHalls(data));
+            .then(data => {
+                setHalls(data)
+                setLoading(false)
+            });
     }, [sessionDate, state.theater.id]);
 
 
@@ -38,7 +42,7 @@ const SelectSessionSection = ({movieId}) => {
 
         return [...Array(5)].map((e, index) => {
             const date = new Date();
-            date.setDate(currentDate.getDate() - index);
+            date.setDate(currentDate.getDate() + index);
             date.setMonth(currentDate.getMonth());
 
             return {
@@ -66,8 +70,12 @@ const SelectSessionSection = ({movieId}) => {
                 </select>
             </div>
 
+            {!loading || <p>Loading data...</p>}
+
             <div className="d-flex flex-md-column justify-content-center justify-content-lg-start">
-                {halls.map((hall => {
+                {halls.length === 0
+                    ? <p>Sorry, there is no sessions for this date.</p>
+                    : halls.map((hall => {
                     return (
                         <div className={classes.SessionsRow} key={hall.id}>
                             <div>

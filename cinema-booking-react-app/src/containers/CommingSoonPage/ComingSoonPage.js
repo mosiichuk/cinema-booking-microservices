@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 
 const ComingSoonPage = () => {
     const [movies, setMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch(`/api/movies`)
@@ -21,10 +22,9 @@ const ComingSoonPage = () => {
                 });
 
                 setMovies(moviesForDate);
+                setLoading(false);
             });
     }, []);
-
-    console.log(movies);
 
     return (
         <div className={classes.ComingSoonSection} id="soon">
@@ -36,7 +36,11 @@ const ComingSoonPage = () => {
                     </div>
                 </Row>
 
-                {Array.from(movies).map(([date, moviesList]) => {
+                {!loading || <p>Loading data...</p>}
+
+                {(movies === undefined || movies.length === 0)
+                    ? <p>There will be no movies next week.</p>
+                    : Array.from(movies).map(([date, moviesList]) => {
                     const parsedDate = new Date(Date.parse(date));
                     const formattedDate = parsedDate.toLocaleString('en-US', { day: '2-digit', month: 'long' });
                     const formattedDay = parsedDate.toLocaleString('en-US', { weekday: 'long'});
