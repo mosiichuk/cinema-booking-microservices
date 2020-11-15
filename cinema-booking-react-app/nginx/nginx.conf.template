@@ -10,7 +10,7 @@ server {
 
   location /api/ {
       rewrite ^/api/(.*) /$1 break;
-      proxy_pass http://api-gateway:8011;
+      proxy_pass ${API_GATEWAY};
   }
 
   error_page   500 502 503 504  /50x.html;
