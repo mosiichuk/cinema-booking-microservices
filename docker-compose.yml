@@ -33,8 +33,3 @@ services:
     depends_on:
       - api-gateway
       - discovery
-  cinema-booking-react-app:
-    image: kuroiumi/cinema-booking-react-app
-    ports:
-      - 80:80
-
