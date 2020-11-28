@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useAppContext} from "context/AppContext";
 import classes from './SelectSessionSection.module.sass';
 import {Link} from "react-router-dom";
+import TheatersService from "../../api/TheatersService";
 
 const timeSlots = [
     '10:00',
@@ -18,6 +19,8 @@ const timeSlots = [
     '21:00'
 ];
 
+const theatersService = new TheatersService();
+
 const SelectSessionSection = ({movieId}) => {
     const dates = getDates();
 
@@ -26,13 +29,10 @@ const SelectSessionSection = ({movieId}) => {
     const [sessionDate, setSessionDate] = useState(dates[0].date);
     const [halls, setHalls] = useState([]);
 
-    useEffect(() => {
-        fetch(`/api/theaters/${state.theater.id}/halls?movieId=${movieId}&date=${sessionDate}`)
-            .then(data => data.json())
-            .then(data => {
-                setHalls(data)
-                setLoading(false)
-            });
+    useEffect(async () => {
+        const hallsWithSessionsInfo = await theatersService.getSessionsForMovie(state.theater.id, movieId, sessionDate);
+        setHalls(hallsWithSessionsInfo);
+        setLoading(false);
     }, [sessionDate, state.theater.id]);
 
 

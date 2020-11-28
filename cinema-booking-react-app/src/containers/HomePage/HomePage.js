@@ -5,18 +5,18 @@ import SliderNavigationButtons
     from "Components/Premiers/PremiersSlider/SliderNavigationButtons/SliderNavigationButtons";
 import SliderNavigation from "Components/Premiers/PremiersSlider/SliderNavigation/SliderNavigation";
 import {useAppContext} from "context/AppContext";
+import TheatersService from "../../api/TheatersService";
+
+const theatersService = new TheatersService();
 
 const HomePage = () => {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
     const [slides, setSlides] = useState([]);
     const [appState] = useAppContext();
 
-    useEffect(() => {
-        fetch(`/api/theaters/${appState.theater.id}/movies?active=true`)
-            .then(response => response.json())
-            .then((data) => {
-                setSlides(data);
-            });
+    useEffect(async () => {
+        const movies = await theatersService.getMoviesForTheater(appState.theater.id);
+        setSlides(movies);
     }, [appState.theater.id]);
 
     return (

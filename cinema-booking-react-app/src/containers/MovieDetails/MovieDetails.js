@@ -8,15 +8,17 @@ import classes from './MovieDetails.module.sass';
 import playButtonIcon from 'Assets/img/play.png'
 import descImg from 'Assets/img/description-img.png'
 import SelectSessionSection from "containers/SelectSessionSection/SelectSessionSection";
+import MoviesService from "../../api/MoviesService";
+
+const moviesService = new MoviesService();
 
 const MovieDetails = () => {
     const {id} = useParams();
     const [movie, setMovie] = useState({});
 
-    useEffect(() => {
-        fetch(`/api/movies/${id}`)
-            .then(data => data.json())
-            .then(data => setMovie(data));
+    useEffect(async () => {
+        const movie = await moviesService.getMovieById(id);
+        setMovie(movie);
     }, []);
 
     return (

@@ -3,15 +3,17 @@ import classes from './LocationSelector.module.sass';
 import location from 'Assets/icons/location.png';
 import {useAppContext} from 'context/AppContext';
 import types from 'context/types';
+import TheatersService from "../../../api/TheatersService";
+
+const theatersService = new TheatersService();
 
 const LocationSelector = () => {
     const [state, dispatch] = useAppContext();
     const [theaters, setTheaters] = useState();
 
-    useEffect(() => {
-        fetch(`/api/theaters`)
-            .then(data => data.json())
-            .then(data => setTheaters(data));
+    useEffect(async () => {
+        const theaters = await theatersService.getAllTheaters();
+        setTheaters(theaters);
     }, []);
 
     const changeCurrentTheater = ({target}) => {

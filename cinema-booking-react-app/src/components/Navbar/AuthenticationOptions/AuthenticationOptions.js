@@ -3,11 +3,14 @@ import authOptionsBg from 'Assets/img/login-bg.png';
 import classes from './AuthenticationOptions.module.sass';
 import types from 'context/types';
 import {useAppDispatch} from "context/AppContext";
+import UsersService from "../../../api/UsersService";
 
 const forms = {
     LOGIN: 'login-form',
     SIGN_UP: 'signup-form'
 };
+
+const usersService = new UsersService();
 
 const AuthenticationOptions = ({closeAuthOptionsPopup}) => {
     const [shownForm, setShownForm] = useState(forms.LOGIN);
@@ -61,44 +64,32 @@ const LoginForm = ({closeAuthOptionsPopup}) => {
         success: ''
     });
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        fetch('/users/login', {
-            method: "POST",
-            body: JSON.stringify(userSignUpData),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(response => {
-                if (!response.ok)
-                    throw new Error('Something went wrong');
+        try {
+            const [headers] = await usersService.login(userSignUpData);
 
-                return response.headers;
-            })
-            .then(headers => {
-                dispatch({
-                    type: types.SET_USER,
-                    payload: {
-                        token: 'Bearer ' + headers.get('token'),
-                        userId: headers.get('userid')
-                    }
-                });
-                closeAuthOptionsPopup();
-            })
-            .catch(error => setMessages({success: '', error: 'Something went wrong. Please try again.'}));
+            dispatch({
+                type: types.SET_USER,
+                payload: {
+                    token: 'Bearer ' + headers.get('token'),
+                    userId: headers.get('userid')
+                }
+            });
+
+            closeAuthOptionsPopup();
+        } catch (error) {
+            setMessages({success: '', error: 'Something went wrong. Please try again.'})
+        }
     }
 
     const changeUserEmail = (event) => {
         setUserSignUpData({...userSignUpData, email: event.target.value});
-        console.log(userSignUpData);
     }
 
     const changeUserPassword = (event) => {
         setUserSignUpData({...userSignUpData, password: event.target.value});
-        console.log(userSignUpData);
     }
 
     return (
@@ -140,43 +131,32 @@ const SignupForm = () => {
         success: ''
     });
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        fetch('/users', {
-            method: "POST",
-            body: JSON.stringify(userSignUpData),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(response => {
-                if (!response.ok)
-                    throw new Error('Something went wrong');
+        try {
+            const data = await usersService.login(userSignUpData);
 
-                return response.json();
-            })
-            .then(json => setMessages({
+            setMessages({
                 error: '',
-                success: `<span>${json.name}</span>, your account was successfully created. Please proceed with login.`
-            }))
-            .catch(error => setMessages({success: '', error: 'Something went wrong. Please try again.'}));
+                success: `<span>${data.name}</span>, your account was successfully created. Please proceed with login.`
+            });
+
+        } catch (error) {
+            setMessages({success: '', error: 'Something went wrong. Please try again.'});
+        }
     }
 
     const changeUserName = (event) => {
         setUserSignUpData({...userSignUpData, name: event.target.value});
-        console.log(userSignUpData);
     }
 
     const changeUserEmail = (event) => {
         setUserSignUpData({...userSignUpData, email: event.target.value});
-        console.log(userSignUpData);
     }
 
     const changeUserPassword = (event) => {
         setUserSignUpData({...userSignUpData, password: event.target.value});
-        console.log(userSignUpData);
     }
 
     return (

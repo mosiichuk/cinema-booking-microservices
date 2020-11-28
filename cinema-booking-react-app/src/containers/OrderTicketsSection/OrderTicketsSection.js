@@ -5,11 +5,14 @@ import screenImg from 'Assets/img/screen.png'
 
 import CartSummary from "../../components/CartSummary/CartSummary";
 import {useAppState} from "../../context/AppContext";
+import TheatersService from "../../api/TheatersService";
 
 const SEAT_TYPES = {
     COMMOM: "COMMON",
     ADVANCED: "ADVANCED",
 };
+
+const theatersService = new TheatersService();
 
 const OrderTicketsSection = () => {
 
@@ -17,10 +20,9 @@ const OrderTicketsSection = () => {
     const appState = useAppState();
     const {showingId} = useParams();
 
-    useEffect(() => {
-        fetch(`/api/theaters/${appState.theater.id}/showings/${showingId}/seats`)
-            .then(data => data.json())
-            .then(data => setSeats(prepateSeatsForView(data)));
+    useEffect(async () => {
+        const seats = await theatersService.getSeatsForShowing(appState.theater.id, showingId);
+        setSeats(prepateSeatsForView(seats));
     }, []);
 
     function prepateSeatsForView(data) {

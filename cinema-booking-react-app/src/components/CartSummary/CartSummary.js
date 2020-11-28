@@ -6,16 +6,18 @@ import calendarImg from 'Assets/icons/calendar.png'
 import locationImg from 'Assets/icons/location.png'
 import creditcardImg from 'Assets/icons/creditcard.png'
 import {useAppState} from "../../context/AppContext";
+import TheatersService from "../../api/TheatersService";
+
+const theatersService = new TheatersService();
 
 const CartSummary = () => {
     const {showingId} = useParams();
     const [showing, setShowing] = useState();
     const appState = useAppState();
 
-    useEffect(() => {
-        fetch(`/api/theaters/${appState.theater.id}/showings/${showingId}`)
-            .then(data => data.json())
-            .then(data => setShowing(data));
+    useEffect(async () => {
+        const showing = await theatersService.getShowing(appState.theater.id, showingId);
+        setShowing(showing)
     }, []);
 
     if(!showing)

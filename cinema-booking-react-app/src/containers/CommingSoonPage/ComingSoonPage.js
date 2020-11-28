@@ -3,27 +3,28 @@ import {Container, Col} from "react-bootstrap";
 import classes from "containers/CommingSoonPage/ComingSoonPage.module.sass";
 import Row from "react-bootstrap/Row";
 import {Link} from "react-router-dom";
+import MoviesService from "../../api/MoviesService";
+
+const moviesService = new MoviesService();
 
 const ComingSoonPage = () => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        fetch(`/api/movies`)
-            .then(data => data.json())
-            .then(movies => {
-                const moviesForDate = new Map();
+    useEffect(async () => {
+        const movies = await moviesService.getAllMovies();
 
-                movies.forEach(movie => {
-                    const currentMoviesForDate = moviesForDate.get(movie.releaseDate);
-                    currentMoviesForDate
-                        ? moviesForDate.set(movie.releaseDate, [...currentMoviesForDate, movie])
-                        : moviesForDate.set(movie.releaseDate, [movie]);
-                });
+        const moviesForDate = new Map();
 
-                setMovies(moviesForDate);
-                setLoading(false);
-            });
+        movies.forEach(movie => {
+            const currentMoviesForDate = moviesForDate.get(movie.releaseDate);
+            currentMoviesForDate
+                ? moviesForDate.set(movie.releaseDate, [...currentMoviesForDate, movie])
+                : moviesForDate.set(movie.releaseDate, [movie]);
+        });
+
+        setMovies(moviesForDate);
+        setLoading(false);
     }, []);
 
     return (
