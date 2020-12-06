@@ -6,11 +6,8 @@ import screenImg from 'Assets/img/screen.png'
 import CartSummary from "../../components/CartSummary/CartSummary";
 import {useAppState} from "../../context/AppContext";
 import TheatersService from "../../api/TheatersService";
-
-const SEAT_TYPES = {
-    COMMOM: "COMMON",
-    ADVANCED: "ADVANCED",
-};
+import Seat from "../../components/Seat/Seat";
+import SeatType from "../../components/Seat/SeatType";
 
 const theatersService = new TheatersService();
 
@@ -20,10 +17,14 @@ const OrderTicketsSection = () => {
     const appState = useAppState();
     const {showingId} = useParams();
 
-    useEffect(async () => {
-        const seats = await theatersService.getSeatsForShowing(appState.theater.id, showingId);
-        setSeats(prepateSeatsForView(seats));
+    useEffect(() => {
+        setSeatsData();
     }, []);
+
+    async function setSeatsData() {
+        const seatsData = await theatersService.getSeatsForShowing(appState.theater.id, showingId, appState.userData.userId);
+        setSeats(prepateSeatsForView(seatsData));
+    }
 
     function prepateSeatsForView(data) {
         const rowsToSeatsMapping = new Map();
@@ -49,23 +50,18 @@ const OrderTicketsSection = () => {
                             <div className={classes.Seats}>
                                 {Array.from(seats).map(([rowNumber, seatsList]) => {
                                     const seatsType = seatsList[0].seatType;
-                                    const rowClass = seatsType === SEAT_TYPES.ADVANCED ? classes.SeatsRowLg : classes.SeatsRow;
-                                    const seatClasses = [];
-                                    seatClasses.push(seatsType === SEAT_TYPES.ADVANCED ? classes.SeatsSofaLg : classes.SeatsSofa);
+                                    const rowClass = seatsType === SeatType.ADVANCED ? classes.SeatsRowLg : classes.SeatsRow;
 
                                     return(
                                         <div className={rowClass} key={rowNumber}>
                                             {seatsList.map(seat => {
 
-                                                if(seat.reserved)
-                                                    seatClasses.push(classes.SeatsSofaTaken)
-                                                else if(seat.reservedByUser)
-                                                    seatClasses.push(classes.SeatsSofaChoosen)
-                                                else
-                                                    seatClasses.push(classes.SeatsSofaFree)
-
                                                 return (
-                                                    <div className={seatClasses.join(" ")} key={seat.id} id={seat.id}></div>
+                                                    <Seat seat={seat}
+                                                          showingId={showingId}
+                                                          key={seat.id}
+                                                          onReservationStatusChangedCallback={setSeatsData}
+                                                    />
                                                 );
                                             })}
                                         </div>
@@ -92,7 +88,6 @@ const OrderTicketsSection = () => {
 
                     <div className="col-12 col-xl-5">
                         <CartSummary/>
-
                     </div>
                 </div>
             </div>

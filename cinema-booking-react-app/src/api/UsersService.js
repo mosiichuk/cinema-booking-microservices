@@ -7,10 +7,10 @@ export default class UsersService {
     async login(data = {}) {
         const response = await apiService.doPost('/users/login', data);
 
-        return [response.headers, response.json];
+        return [response.headers];
     }
 
     async createUser(data = {}) {
-        return  await apiService.doPost('/users', data).json;
+        return await apiService.doPost('/users', data);
     }
 }

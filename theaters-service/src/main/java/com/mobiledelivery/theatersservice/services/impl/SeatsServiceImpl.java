@@ -25,7 +25,7 @@ public class SeatsServiceImpl implements SeatsService {
     private ReservationsService reservationsService;
 
     @Override
-    public List<SeatData> findAllByShowingId(long showingId) {
+    public List<SeatData> findAllByShowingId(long showingId, String userId) {
         List<SeatEntity> seats = seatRepository.findByShowingId(showingId);
 
         Map<Long, ReservationData> reservations = reservationsService.findAllByShowingId(showingId).stream()
@@ -33,8 +33,12 @@ public class SeatsServiceImpl implements SeatsService {
 
         List<SeatData> seatDataList = ObjectMapperUtils.mapAll(seats, SeatData.class);
 
-        seatDataList.forEach(seat -> {
-            seat.setReserved(reservations.containsKey(seat.getId()));
+        seatDataList.stream()
+                .filter(seat -> reservations.containsKey(seat.getId()))
+                .forEach(seat -> {
+            seat.setReserved(true);
+            seat.setReservedByUser(userId.equals(reservations.get(seat.getId()).getUserId()));
+            seat.setReservationId(reservations.get(seat.getId()).getId());
         });
 
         return seatDataList;

@@ -17,4 +17,5 @@ public class SeatWsDto implements Serializable {
     private SeatType seatType;
     private boolean isReserved;
     private boolean isReservedByUser;
+    private long reservationId;
 }

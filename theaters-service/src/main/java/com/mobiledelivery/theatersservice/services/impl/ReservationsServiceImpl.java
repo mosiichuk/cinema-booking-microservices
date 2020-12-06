@@ -41,6 +41,7 @@ public class ReservationsServiceImpl implements ReservationsService {
         seatReservation.setReserved(reservationData.isReserved());
         seatReservation.setSeat(findSeat(reservationData.getSeatId()));
         seatReservation.setShowing(findShowing(reservationData.getShowingId()));
+        seatReservation.setUserId(reservationData.getUserId());
 
         return modelMapper.map(reservationsRepository.save(seatReservation), ReservationData.class);
     }
@@ -58,6 +59,18 @@ public class ReservationsServiceImpl implements ReservationsService {
         return reservationsRepository.findAllByShowingId(id).stream()
                 .map(this::convert)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ReservationData> findAllByShowingIdAndUserId(long id, String userId) {
+        return reservationsRepository.findAllByShowingIdAndUserId(id, userId).stream()
+                .map(this::convert)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteById(long id) {
+        reservationsRepository.deleteById(id);
     }
 
     private ReservationData convert(SeatReservationEntity seatReservationEntity) {

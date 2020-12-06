@@ -7,4 +7,6 @@ import java.util.List;
 public interface ReservationsService {
     ReservationData createReservation(ReservationData reservationData);
     List<ReservationData> findAllByShowingId(long id);
+    List<ReservationData> findAllByShowingIdAndUserId(long id, String userId);
+    void deleteById(long id);
 }

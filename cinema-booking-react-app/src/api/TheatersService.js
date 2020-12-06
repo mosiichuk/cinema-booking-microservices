@@ -15,16 +15,11 @@ export default class TheatersService {
         return await apiService.doGet(`/theaters/${theaterId}/showings/${showingId}`);
     }
 
-    async getSeatsForShowing(theaterId, showingId) {
-        return await apiService.doGet(`/theaters/${theaterId}/showings/${showingId}/seats`);
+    async getSeatsForShowing(theaterId, showingId, userId) {
+        return await apiService.doGet(`/theaters/${theaterId}/showings/${showingId}/seats?userId=${userId}`);
     }
 
     async getSessionsForMovie(theaterId, movieId, sessionDate) {
         return await apiService.doGet(`/theaters/${theaterId}/halls?movieId=${movieId}&date=${sessionDate}`);
     }
-
-    async createReservation(id, data = {}) {
-        return await apiService.doPost(`/task/${id}`, data);
-    }
-
 }

@@ -19,4 +19,6 @@ public class SeatData {
     private boolean isReserved;
 
     private boolean isReservedByUser;
+
+    private long reservationId;
 }

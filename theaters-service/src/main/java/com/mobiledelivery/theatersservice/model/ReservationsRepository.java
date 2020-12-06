@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface ReservationsRepository extends CrudRepository<SeatReservationEntity, Long> {
     List<SeatReservationEntity> findAllByShowingId(long id);
+    List<SeatReservationEntity> findAllByShowingIdAndUserId(long id, String userId);
     Optional<SeatReservationEntity> findByShowingIdAndSeatId(long showingId, long seatId);
 }

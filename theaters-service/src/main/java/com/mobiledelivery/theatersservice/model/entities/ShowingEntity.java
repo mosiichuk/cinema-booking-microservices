@@ -36,4 +36,9 @@ public class ShowingEntity {
             cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<SeatReservationEntity> seatReservations;
+
+    @OneToMany(mappedBy = "price", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private Set<PriceEntity> prices;
 }

@@ -4,6 +4,8 @@ import com.mobiledelivery.theatersservice.controllers.dto.*;
 import com.mobiledelivery.theatersservice.services.*;
 import com.mobiledelivery.theatersservice.services.data.TheaterData;
 import com.mobiledelivery.theatersservice.utils.ObjectMapperUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/theaters")
 public class TheatersController {
+    private static final Logger LOG = LoggerFactory.getLogger(TheatersController.class);
 
     private TheatersService theatersService;
     private MoviesService moviesService;
@@ -63,7 +66,8 @@ public class TheatersController {
     }
 
     @GetMapping("/{theaterId}/showings/{showingId}/seats")
-    public List<SeatWsDto> getSeats(@PathVariable long showingId) {
-        return ObjectMapperUtils.mapAll(seatsService.findAllByShowingId(showingId), SeatWsDto.class);
+    public List<SeatWsDto> getSeats(@PathVariable long showingId, @RequestParam String userId) {
+        LOG.info("User id = {}, showing id = {}", showingId, userId);
+        return ObjectMapperUtils.mapAll(seatsService.findAllByShowingId(showingId, userId), SeatWsDto.class);
     }
 }

@@ -39,10 +39,10 @@ export default class ApiService {
         });
 
         if (response.status >= 400) {
-            throw new Error(`Error during request. Url: ${url}, data: ${data}`);
+            return await Promise.reject(new Error(`Error during request. Url: ${url}, data: ${data}`));
         }
 
-        return await response;
+        return await Promise.resolve(response);
     }
 
     async doDelete(url = '') {
@@ -52,10 +52,10 @@ export default class ApiService {
         });
 
         if (response.status >= 400) {
-            throw new Error(`Error during request. Url: ${url}}`);
+            return await Promise.reject(new Error(`Error during request. Url: ${url}.`));
         }
 
-        return await response.json();
+        return await Promise.resolve(response);
     }
 
     async doPut(url = '', data = {}) {

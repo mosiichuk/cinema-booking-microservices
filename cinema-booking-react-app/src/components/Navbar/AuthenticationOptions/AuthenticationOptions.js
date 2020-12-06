@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import authOptionsBg from 'Assets/img/login-bg.png';
 import classes from './AuthenticationOptions.module.sass';
 import types from 'context/types';
-import {useAppDispatch} from "context/AppContext";
+import {useAppContext, useAppDispatch, useAppState} from "context/AppContext";
 import UsersService from "../../../api/UsersService";
 
 const forms = {
@@ -52,7 +52,7 @@ const AuthenticationOptions = ({closeAuthOptionsPopup}) => {
 };
 
 const LoginForm = ({closeAuthOptionsPopup}) => {
-    const dispatch = useAppDispatch();
+    const [appState, dispatch] = useAppContext();
 
     const [userSignUpData, setUserSignUpData] = useState({
         email: '',
@@ -134,17 +134,14 @@ const SignupForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const data = await usersService.login(userSignUpData);
-
-            setMessages({
-                error: '',
-                success: `<span>${data.name}</span>, your account was successfully created. Please proceed with login.`
-            });
-
-        } catch (error) {
-            setMessages({success: '', error: 'Something went wrong. Please try again.'});
-        }
+        await usersService.createUser(userSignUpData)
+            .then(data =>
+                    setMessages({
+                        error: '',
+                        success: `<span>${data.json().name}</span>, your account was successfully created. Please proceed with login.`
+                    }),
+                error => setMessages({success: '', error: 'Something went wrong. Please try again.'}),
+            );
     }
 
     const changeUserName = (event) => {
