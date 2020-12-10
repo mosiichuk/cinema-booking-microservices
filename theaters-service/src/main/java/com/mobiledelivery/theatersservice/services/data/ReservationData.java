@@ -15,4 +15,12 @@ public class ReservationData {
     private boolean reserved;
 
     private String userId;
+
+    private long rowNumber;
+
+    private long seatNumber;
+
+    private long price;
+
+    private long salon;
 }

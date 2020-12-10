@@ -3,9 +3,7 @@ package com.mobiledelivery.theatersservice.services.impl;
 import com.mobiledelivery.theatersservice.model.ReservationsRepository;
 import com.mobiledelivery.theatersservice.model.SeatRepository;
 import com.mobiledelivery.theatersservice.model.ShowingsRepository;
-import com.mobiledelivery.theatersservice.model.entities.SeatEntity;
-import com.mobiledelivery.theatersservice.model.entities.SeatReservationEntity;
-import com.mobiledelivery.theatersservice.model.entities.ShowingEntity;
+import com.mobiledelivery.theatersservice.model.entities.*;
 import com.mobiledelivery.theatersservice.services.ReservationsService;
 import com.mobiledelivery.theatersservice.services.data.ReservationData;
 import org.modelmapper.ModelMapper;
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -32,6 +31,8 @@ public class ReservationsServiceImpl implements ReservationsService {
 
     @Autowired
     private SeatRepository seatRepository;
+
+    private Map<SeatType, Long> priceMap = Map.of(SeatType.COMMON, 10L, SeatType.ADVANCED, 15L);
 
     @Override
     public ReservationData createReservation(ReservationData reservationData) {
@@ -77,6 +78,10 @@ public class ReservationsServiceImpl implements ReservationsService {
         ReservationData reservationData = modelMapper.map(seatReservationEntity, ReservationData.class);
         reservationData.setSeatId(seatReservationEntity.getSeat().getId());
         reservationData.setShowingId(seatReservationEntity.getShowing().getId());
+        reservationData.setSeatNumber(seatReservationEntity.getSeat().getSeatNumber());
+        reservationData.setRowNumber(seatReservationEntity.getSeat().getRowNumber());
+        reservationData.setSalon(seatReservationEntity.getShowing().getHall().getId());
+        reservationData.setPrice(priceMap.get(seatReservationEntity.getSeat().getSeatType()));
         return reservationData;
     }
 
