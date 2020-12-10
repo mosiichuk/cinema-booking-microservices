@@ -7,6 +7,7 @@ import MovieDetails from "containers/MovieDetails/MovieDetails";
 import {AppContextProvider} from "context/AppContext";
 import Footer from "Components/Footer/Footer";
 import OrderTicketsSection from "./containers/OrderTicketsSection/OrderTicketsSection";
+import OrderConfirmation from "./containers/OrderConfirmation/OrderConfirmation";
 
 function App() {
 
@@ -27,6 +28,9 @@ function App() {
                     </Route>
                     <Route exact path="/showings/:showingId">
                         <OrderTicketsSection/>
+                    </Route>
+                    <Route exact path="/orderConfirmation/:orderId">
+                        <OrderConfirmation/>
                     </Route>
                 </Switch>
 

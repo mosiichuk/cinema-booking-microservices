@@ -11,4 +11,9 @@ export default class ReservationsService {
     async removeReservation(reservationId) {
         await apiService.doDelete(`/reservations/${reservationId}`);
     }
+
+    async findReservations(showingId, userId) {
+        return await apiService.doGet(`/reservations?showingId=${showingId}&userId=${userId}`);
+    }
+
 }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import classes from "./CartSummary.module.sass";
 import clockImg from 'Assets/icons/clock.png'
-import {useLocation, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import calendarImg from 'Assets/icons/calendar.png'
 import locationImg from 'Assets/icons/location.png'
 import creditcardImg from 'Assets/icons/creditcard.png'
@@ -10,7 +10,7 @@ import TheatersService from "../../api/TheatersService";
 
 const theatersService = new TheatersService();
 
-const CartSummary = () => {
+const CartSummary = ({reservations}) => {
     const {showingId} = useParams();
     const [showing, setShowing] = useState();
     const appState = useAppState();
@@ -20,7 +20,7 @@ const CartSummary = () => {
         setShowing(showing)
     }, []);
 
-    if(!showing)
+    if (!showing || !reservations)
         return null;
 
     return (
@@ -57,50 +57,42 @@ const CartSummary = () => {
                             <p>Seat</p>
                             <p>Price</p>
                         </div>
-                        <div className={classes.TicketsInfo}>
-                            <p>
-                                1223
-                            </p>
-                            <p>
-                                02
-                            </p>
-                            <p>
-                                03
-                            </p>
-                            <p>
-                                11
-                            </p>
-                            <p>
-                                30$
-                            </p>
-                        </div>
-                        <div className={classes.TicketsInfo}>
-                            <p>
-                                1323
-                            </p>
-                            <p>
-                                02
-                            </p>
-                            <p>
-                                08
-                            </p>
-                            <p>
-                                06
-                            </p>
-                            <p>
-                                40$
-                            </p>
-                        </div>
+
+                        {!reservations || reservations.map(reservation => {
+
+                            return (
+                                <div className={classes.TicketsInfo} key={reservation.id}>
+                                    <p>
+                                        {reservation.id}
+                                    </p>
+                                    <p>
+                                        {reservation.salon}
+                                    </p>
+                                    <p>
+                                        {reservation.rowNumber}
+                                    </p>
+                                    <p>
+                                        {reservation.seatNumber}
+                                    </p>
+                                    <p>
+                                        {reservation.price}
+                                    </p>
+                                </div>
+                            );
+                        })}
+
                     </div>
                     <div
                         className="d-flex flex-column text-center flex-sm-row justify-content-sm-between">
                         <div className="d-flex justify-content-center">
-                            <button className={classes.BuyButton}>
-                                <img src={creditcardImg} alt="credit card icon"/>
-                                Buy a ticket
-                            </button>
+                            <Link to="/orderConfirmation/1">
+                                <button className={classes.BuyButton}>
+                                    <img src={creditcardImg} alt="credit card icon"/>
+                                    Buy a ticket
+                                </button>
+                            </Link>
                         </div>
-                        <h3 className={classes.SummaryDesc}>Sum up: <span> 60$</span></h3>
+                        <h3 className={classes.SummaryDesc}>Sum up: <span> {reservations.map(reservation => reservation.price).reduce((a, b) => a + b, 0)}</span></h3>
                     </div>
                 </div>
             </div>
