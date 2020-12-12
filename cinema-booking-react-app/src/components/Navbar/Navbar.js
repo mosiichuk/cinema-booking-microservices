@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import LocationSelector from "Components/Navbar/LocationSelector/LocationSelector";
 import AuthenticationOptions from "Components/Navbar/AuthenticationOptions/AuthenticationOptions";
 import {useAppContext, useAppDispatch} from "context/AppContext";
-import types from 'context/types';
+import types from 'context/contextActions';
 
 const Navbar = () => {
     const [openAuthOptions, setOpenAuthOptions] = useState(false);

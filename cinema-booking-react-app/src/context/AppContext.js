@@ -1,5 +1,5 @@
 import React from 'react'
-import types from './types';
+import types from './contextActions';
 
 const AppStateContext = React.createContext();
 const AppContextDispatchContext = React.createContext();

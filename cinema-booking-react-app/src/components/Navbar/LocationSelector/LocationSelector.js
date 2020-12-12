@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import classes from './LocationSelector.module.sass';
 import location from 'Assets/icons/location.png';
 import {useAppContext} from 'context/AppContext';
-import types from 'context/types';
+import types from 'context/contextActions';
 import TheatersService from "../../../api/TheatersService";
 
 const theatersService = new TheatersService();
