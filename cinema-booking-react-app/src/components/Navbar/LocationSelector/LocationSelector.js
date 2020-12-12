@@ -17,14 +17,15 @@ const LocationSelector = () => {
     }, []);
 
     const changeCurrentTheater = ({target}) => {
-        const index = target.selectedIndex;
-        const optionElement = target.childNodes[index]
-        const theater = {
-            id: optionElement.getAttribute('data-id'),
-            name: target.value
-        };
+        const optionElement = target.childNodes[target.selectedIndex]
 
-        dispatch({type: types.SET_THEATER, payload: theater});
+        dispatch({
+            type: types.SET_THEATER,
+            payload: {
+                id: optionElement.getAttribute('data-id'),
+                name: target.value
+            }
+        });
     }
 
     return (
