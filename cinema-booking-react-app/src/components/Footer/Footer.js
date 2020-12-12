@@ -7,10 +7,6 @@ import logo from 'Assets/icons/logo.png';
 import classes from './Footer.module.sass';
 
 const Footer = () => {
-    const location = useLocation();
-
-    if (location && location.pathname === '/')
-        return null;
 
     return (
         <footer id="footer" className={classes.Footer}>
