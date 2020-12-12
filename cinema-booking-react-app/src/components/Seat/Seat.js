@@ -1,16 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classes from "./Seat.module.sass";
 import SeatType from "./SeatType";
 import {useAppState} from "../../context/AppContext";
 import ReservationsService from "../../api/ReservationsService";
 
 const reservationsService = new ReservationsService();
-
-const SEAT_STATE = {
-    FREE: "free",
-    BOOKED: "booked",
-    BOOKED_BY_USER: 'booked by user'
-}
 
 const Seat = ({seat, showingId, onReservationStatusChangedCallback}) => {
     const seatClasses = [];
@@ -47,5 +42,11 @@ const Seat = ({seat, showingId, onReservationStatusChangedCallback}) => {
         </div>
     );
 };
+
+Seat.propTypes = {
+    seat: PropTypes.object,
+    showingId: PropTypes.number,
+    onReservationStatusChangedCallback: PropTypes.func,
+}
 
 export default Seat;
