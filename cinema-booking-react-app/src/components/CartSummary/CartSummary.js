@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import classes from "./CartSummary.module.sass";
-import clockImg from 'Assets/icons/clock.png'
+import clockImg from 'assets/icons/clock.png'
 import {Link, useParams} from 'react-router-dom';
-import calendarImg from 'Assets/icons/calendar.png'
-import locationImg from 'Assets/icons/location.png'
-import creditcardImg from 'Assets/icons/creditcard.png'
+import calendarImg from 'assets/icons/calendar.png'
+import locationImg from 'assets/icons/location.png'
+import creditcardImg from 'assets/icons/creditcard.png'
 import {useAppState} from "../../context/AppContext";
 import TheatersService from "../../api/TheatersService";
 

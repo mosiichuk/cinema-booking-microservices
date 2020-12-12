@@ -1,11 +1,11 @@
 import React from 'react';
 import {Route, useLocation} from "react-router-dom";
 import HomePage from "./containers/HomePage/HomePage";
-import Navbar from "Components/Navbar/Navbar";
+import Navbar from "components/Navbar/Navbar";
 import ComingSoonPage from "containers/CommingSoonPage/ComingSoonPage";
 import MovieDetails from "containers/MovieDetails/MovieDetails";
 import {AppContextProvider} from "context/AppContext";
-import Footer from "Components/Footer/Footer";
+import Footer from "components/Footer/Footer";
 import OrderTicketsSection from "./containers/OrderTicketsSection/OrderTicketsSection";
 import OrderConfirmation from "./containers/OrderConfirmation/OrderConfirmation";
 

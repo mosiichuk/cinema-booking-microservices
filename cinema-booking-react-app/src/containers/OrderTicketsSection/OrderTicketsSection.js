@@ -1,7 +1,7 @@
 import classes from './OrderTicketsSection.module.sass'
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import screenImg from 'Assets/img/screen.png'
+import screenImg from 'assets/img/screen.png'
 
 import CartSummary from "../../components/CartSummary/CartSummary";
 import {useAppState} from "../../context/AppContext";

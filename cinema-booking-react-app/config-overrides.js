@@ -4,8 +4,8 @@ const path = require('path');
 module.exports = function override(config) {
 
     alias({
-        Assets: path.resolve("src/assets"),
-        Components: path.resolve("src/components"),
+        assets: path.resolve("src/assets"),
+        components: path.resolve("src/components"),
         hoc: path.resolve("src/hoc"),
         containers: path.resolve("src/containers"),
         context: path.resolve("src/context")

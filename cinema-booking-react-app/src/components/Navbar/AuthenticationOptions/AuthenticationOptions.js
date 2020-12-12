@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import authOptionsBg from 'Assets/img/login-bg.png';
+import authOptionsBg from 'assets/img/login-bg.png';
 import classes from './AuthenticationOptions.module.sass';
 import types from 'context/contextActions';
 import {useAppContext, useAppDispatch, useAppState} from "context/AppContext";

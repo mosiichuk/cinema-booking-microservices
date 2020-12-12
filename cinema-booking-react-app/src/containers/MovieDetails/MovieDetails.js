@@ -5,8 +5,8 @@ import {
 import {Container, Row} from "react-bootstrap";
 import ReactPlayer from "react-player";
 import classes from './MovieDetails.module.sass';
-import playButtonIcon from 'Assets/img/play.png'
-import descImg from 'Assets/img/description-img.png'
+import playButtonIcon from 'assets/img/play.png'
+import descImg from 'assets/img/description-img.png'
 import SelectSessionSection from "containers/SelectSessionSection/SelectSessionSection";
 import MoviesService from "../../api/MoviesService";
 

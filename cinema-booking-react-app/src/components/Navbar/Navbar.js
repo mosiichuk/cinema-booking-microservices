@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
-import logo from 'Assets/icons/logo.png';
-import profile from 'Assets/icons/profile.png';
+import logo from 'assets/icons/logo.png';
+import profile from 'assets/icons/profile.png';
 import {Col, Container, Row} from "react-bootstrap";
 import classes from './Navbar.module.sass';
 import {Link} from "react-router-dom";
-import LocationSelector from "Components/Navbar/LocationSelector/LocationSelector";
-import AuthenticationOptions from "Components/Navbar/AuthenticationOptions/AuthenticationOptions";
+import LocationSelector from "components/Navbar/LocationSelector/LocationSelector";
+import AuthenticationOptions from "components/Navbar/AuthenticationOptions/AuthenticationOptions";
 import {useAppContext, useAppDispatch} from "context/AppContext";
 import types from 'context/contextActions';
 
 const Navbar = () => {
-    const [openAuthOptions, setOpenAuthOptions] = useState(false);
-    const [state, dispatch] = useAppContext();
+    const [isOpenedAuthOptions, setOpenAuthOptions] = useState(false);
+    const [state] = useAppContext();
 
-    const closeAuthOptionsPopup = () => setOpenAuthOptions(!openAuthOptions);
+    const toggleAuthOptionsPopup = () => setOpenAuthOptions(!isOpenedAuthOptions);
 
     return (
         <>
@@ -57,7 +57,7 @@ const Navbar = () => {
                                     <img src={profile} className={classes.NavbarUserActionItems} alt="Profile icon"/>
                                     {state.userData.token
                                         ? <LogoutButton/>
-                                        : <LoginButton closeAuthOptionsPopup={closeAuthOptionsPopup}/>
+                                        : <LoginButton closeAuthOptionsPopup={toggleAuthOptionsPopup}/>
                                     }
                                 </div>
                             </div>
@@ -66,7 +66,7 @@ const Navbar = () => {
                 </Container>
             </div>
 
-            {!openAuthOptions || <AuthenticationOptions closeAuthOptionsPopup={closeAuthOptionsPopup}/>}
+            {!isOpenedAuthOptions || <AuthenticationOptions closeAuthOptionsPopup={toggleAuthOptionsPopup}/>}
         </>
     );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-import arrowLeft from 'Assets/icons/arrow-left.png';
-import arrowRight from 'Assets/icons/arrow-right.png';
+import arrowLeft from 'assets/icons/arrow-left.png';
+import arrowRight from 'assets/icons/arrow-right.png';
 import classes from './SliderNavigationButtons.module.sass';
 
 const SliderNavigationButtons = ({slidesAmount, currentSlideIndex, setCurrentSlideIndex}) => {
