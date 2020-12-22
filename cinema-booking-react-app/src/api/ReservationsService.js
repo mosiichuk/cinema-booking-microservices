@@ -1,19 +1,17 @@
-import ApiService from "./ApiService";
-
-const apiService = new ApiService();
+import axios from "./api";
 
 export default class ReservationsService {
 
     async createReservation(data = {}) {
-        return await apiService.doPost(`/reservations`, data);
+        return await axios.post(`/reservations`, data);
     }
 
     async removeReservation(reservationId) {
-        await apiService.doDelete(`/reservations/${reservationId}`);
+        await axios.delete(`/reservations/${reservationId}`);
     }
 
     async findReservations(showingId, userId) {
-        return await apiService.doGet(`/reservations?showingId=${showingId}&userId=${userId}`);
+        return await axios.get(`/reservations?showingId=${showingId}&userId=${userId}`);
     }
 
 }

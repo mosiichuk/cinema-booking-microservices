@@ -5,7 +5,7 @@ import {Link, useParams} from 'react-router-dom';
 import calendarImg from 'assets/icons/calendar.png'
 import locationImg from 'assets/icons/location.png'
 import creditcardImg from 'assets/icons/creditcard.png'
-import {useAppState} from "../../context/AppContext";
+import {useAppState} from "../../context/GlobalContext";
 import TheatersService from "../../api/TheatersService";
 
 const theatersService = new TheatersService();

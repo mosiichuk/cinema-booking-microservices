@@ -31,7 +31,8 @@ const OrderTicketsSection = () => {
     }
 
     async function setupReservations() {
-        const reservations = await reservationsService.findReservations(showingId, appState.userData.userId);
+        const reservations = await reservationsService.findReservations(showingId, appState.userData.userId)
+            .then(response => response.data);
         setReservations(reservations);
     }
 

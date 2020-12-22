@@ -1,25 +1,14 @@
-import ApiService from "./ApiService";
-
-const apiService = new ApiService();
+import axios from "./api";
 
 export default class MoviesService {
+
     async getAllMovies() {
-        return await apiService.doGet('/movies');
+        return await axios.get('/movies')
+            .then(response => response.data);
     }
 
     async getMovieById(id) {
-        return await apiService.doGet(`/movies/${id}`);
-    }
-
-    async addTask(data = {}) {
-        return await apiService.doPost('/task', data);
-    }
-
-    async updateTask(id, data = {}) {
-        return await apiService.doPut(`/task/${id}`, data);
-    }
-
-    async deleteTask(id) {
-        return await apiService.doDelete(`/task/${id}`);
+        return await axios.get(`/movies/${id}`)
+            .then(response => response.data);
     }
 }
