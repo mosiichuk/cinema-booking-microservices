@@ -64,7 +64,7 @@ const LoginForm = ({closeAuthOptionsPopup}) => {
                     type: types.SET_USER,
                     payload: {
                         token: headers.token,
-                        userId: headers.userId
+                        user: headers.user
                     }
                 });
 

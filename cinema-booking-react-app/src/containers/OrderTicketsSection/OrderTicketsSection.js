@@ -26,12 +26,12 @@ const OrderTicketsSection = () => {
     }, []);
 
     async function setSeatsData() {
-        const seatsData = await theatersService.getSeatsForShowing(appState.theater.id, showingId, appState.userData.userId);
+        const seatsData = await theatersService.getSeatsForShowing(appState.theater.id, showingId, appState.userData.user);
         setSeats(prepateSeatsForView(seatsData));
     }
 
     async function setupReservations() {
-        const reservations = await reservationsService.findReservations(showingId, appState.userData.userId)
+        const reservations = await reservationsService.findReservations(showingId, appState.userData.user)
             .then(response => response.data);
         setReservations(reservations);
     }

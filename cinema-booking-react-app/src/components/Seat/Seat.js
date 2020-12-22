@@ -31,7 +31,7 @@ const Seat = ({seat, showingId, onReservationStatusChangedCallback}) => {
                 seatId: seat.id,
                 showingId: showingId,
                 reserved: true,
-                userId: appState.userData.userId
+                userId: appState.userData.user
             });
 
         onReservationStatusChangedCallback();

@@ -10,7 +10,7 @@ const initialState = {
     theater: currentTheater,
     userData: {
         token: localStorage.getItem('token') || '',
-        userId: localStorage.getItem('userid') || ''
+        user: localStorage.getItem('user') || ''
     }
 }
 
