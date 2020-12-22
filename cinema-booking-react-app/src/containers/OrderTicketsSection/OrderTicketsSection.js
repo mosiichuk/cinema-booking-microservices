@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import screenImg from 'assets/img/screen.png'
 
 import CartSummary from "../../components/CartSummary/CartSummary";
-import {useAppState} from "../../context/AppContext";
+import {useAppState} from "../../context/GlobalContext";
 import TheatersService from "../../api/TheatersService";
 import Seat from "../../components/Seat/Seat";
 import SeatType from "../../components/Seat/SeatType";

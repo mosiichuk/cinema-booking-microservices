@@ -5,7 +5,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import classes from './Navbar.module.sass';
 import LocationSelector from "components/Navbar/LocationSelector/LocationSelector";
 import AuthenticationOptions from "components/Navbar/AuthenticationOptions/AuthenticationOptions";
-import {useAppContext, useAppDispatch} from "context/AppContext";
+import {useAppContext, useAppDispatch} from "context/GlobalContext";
 import types from 'context/contextActions';
 import Navigation from "./Navigation/Navigation";
 import Modal from "../Modal/Modal";

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import classes from './LocationSelector.module.sass';
 import location from 'assets/icons/location.png';
-import {useAppContext} from 'context/AppContext';
+import {useAppContext} from 'context/GlobalContext';
 import types from 'context/contextActions';
 import TheatersService from "../../../api/TheatersService";
 

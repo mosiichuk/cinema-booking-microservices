@@ -4,7 +4,7 @@ import PremiersSlider from "components/Premiers/PremiersSlider/PremiersSlider";
 import SliderNavigationButtons
     from "components/Premiers/PremiersSlider/SliderNavigationButtons/SliderNavigationButtons";
 import SliderNavigation from "components/Premiers/PremiersSlider/SliderNavigation/SliderNavigation";
-import {useAppContext} from "context/AppContext";
+import {useAppContext} from "context/GlobalContext";
 import TheatersService from "../../api/TheatersService";
 
 const theatersService = new TheatersService();

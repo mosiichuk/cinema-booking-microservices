@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import authOptionsBg from 'assets/img/login-bg.png';
 import classes from './AuthenticationOptions.module.sass';
 import types from 'context/contextActions';
-import {useAppContext} from "context/AppContext";
+import {useAppContext} from "context/GlobalContext";
 import UsersService from "../../../api/UsersService";
 
 const forms = {
@@ -58,21 +58,21 @@ const LoginForm = ({closeAuthOptionsPopup}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const [headers] = await usersService.login(userSignUpData);
+        await usersService.login(userSignUpData)
+            .then(headers => {
+                dispatch({
+                    type: types.SET_USER,
+                    payload: {
+                        token: headers.token,
+                        userId: headers.userId
+                    }
+                });
 
-            dispatch({
-                type: types.SET_USER,
-                payload: {
-                    token: 'Bearer ' + headers.get('token'),
-                    userId: headers.get('userid')
-                }
+                closeAuthOptionsPopup();
+            })
+            .catch(error => {
+                setMessages({success: '', error: 'Something went wrong. Please try again.'})
             });
-
-            closeAuthOptionsPopup();
-        } catch (error) {
-            setMessages({success: '', error: 'Something went wrong. Please try again.'})
-        }
     }
 
     const changeUserEmail = (event) => {
@@ -129,7 +129,7 @@ const SignupForm = () => {
             .then(data =>
                     setMessages({
                         error: '',
-                        success: `<span>${data.json().name}</span>, your account was successfully created. Please proceed with login.`
+                        success: `<span>${data.name}</span>, your account was successfully created. Please proceed with login.`
                     }),
                 error => setMessages({success: '', error: 'Something went wrong. Please try again.'}),
             );

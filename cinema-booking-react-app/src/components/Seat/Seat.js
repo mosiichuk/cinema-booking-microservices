@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classes from "./Seat.module.sass";
 import SeatType from "./SeatType";
-import {useAppState} from "../../context/AppContext";
+import {useAppState} from "../../context/GlobalContext";
 import ReservationsService from "../../api/ReservationsService";
 
 const reservationsService = new ReservationsService();
