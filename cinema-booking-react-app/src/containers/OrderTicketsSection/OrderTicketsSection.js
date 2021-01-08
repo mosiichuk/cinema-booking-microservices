@@ -1,29 +1,39 @@
 import classes from './OrderTicketsSection.module.sass'
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import screenImg from 'Assets/img/screen.png'
+import screenImg from 'assets/img/screen.png'
 
 import CartSummary from "../../components/CartSummary/CartSummary";
-import {useAppState} from "../../context/AppContext";
+import {useAppState} from "../../context/GlobalContext";
 import TheatersService from "../../api/TheatersService";
 import Seat from "../../components/Seat/Seat";
 import SeatType from "../../components/Seat/SeatType";
+import ReservationsService from "../../api/ReservationsService";
 
 const theatersService = new TheatersService();
+const reservationsService = new ReservationsService();
 
 const OrderTicketsSection = () => {
 
+    const [reservations, setReservations] = useState();
     const [seats, setSeats] = useState({});
     const appState = useAppState();
     const {showingId} = useParams();
 
     useEffect(() => {
         setSeatsData();
+        setupReservations();
     }, []);
 
     async function setSeatsData() {
-        const seatsData = await theatersService.getSeatsForShowing(appState.theater.id, showingId, appState.userData.userId);
+        const seatsData = await theatersService.getSeatsForShowing(appState.theater.id, showingId, appState.userData.user);
         setSeats(prepateSeatsForView(seatsData));
+    }
+
+    async function setupReservations() {
+        const reservations = await reservationsService.findReservations(showingId, appState.userData.user)
+            .then(response => response.data);
+        setReservations(reservations);
     }
 
     function prepateSeatsForView(data) {
@@ -52,7 +62,7 @@ const OrderTicketsSection = () => {
                                     const seatsType = seatsList[0].seatType;
                                     const rowClass = seatsType === SeatType.ADVANCED ? classes.SeatsRowLg : classes.SeatsRow;
 
-                                    return(
+                                    return (
                                         <div className={rowClass} key={rowNumber}>
                                             {seatsList.map(seat => {
 
@@ -60,7 +70,10 @@ const OrderTicketsSection = () => {
                                                     <Seat seat={seat}
                                                           showingId={showingId}
                                                           key={seat.id}
-                                                          onReservationStatusChangedCallback={setSeatsData}
+                                                          onReservationStatusChangedCallback={() => {
+                                                              setSeatsData();
+                                                              setupReservations();
+                                                          }}
                                                     />
                                                 );
                                             })}
@@ -87,7 +100,7 @@ const OrderTicketsSection = () => {
                     </div>
 
                     <div className="col-12 col-xl-5">
-                        <CartSummary/>
+                        <CartSummary reservations={reservations}/>
                     </div>
                 </div>
             </div>

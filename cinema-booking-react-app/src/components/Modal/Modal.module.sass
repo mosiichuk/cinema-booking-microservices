@@ -1,0 +1,28 @@
+@import "assets/styles/mixins/breakpoints"
+@import "assets/styles/mixins/util"
+@import "assets/styles/mixins/reset"
+@import "assets/styles/variables"
+
+.Backdrop
+  position: absolute
+  z-index: 1
+  width: 100%
+  height: 100vh
+  background-color: rgba(38, 38, 38, 0.5)
+  cursor: pointer
+
+.Popup
+  z-index: 1
+  width: 49%
+  height: 75%
+  +abs-center
+  cursor: auto
+
+  +screen-down(lg)
+    width: 40%
+
+  +screen-down(md)
+    width: 55%
+
+  +screen-down(sm)
+    width: 90%

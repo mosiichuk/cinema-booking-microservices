@@ -13,8 +13,7 @@ const SliderNavigation = ({slidesAmount, currentSlideIndex}) => {
                     <div
                         key={index}
                         className={`${classes.NavigationItem} ${activeClassName}`}
-                    >
-                    </div>
+                    />
                 );
             })}
         </div>

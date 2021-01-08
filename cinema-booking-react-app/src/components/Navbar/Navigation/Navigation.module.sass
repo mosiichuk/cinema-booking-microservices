@@ -1,0 +1,25 @@
+@import "assets/styles/mixins/breakpoints"
+@import "assets/styles/mixins/util"
+@import "assets/styles/variables"
+
+.MenuItem
+    margin-right: 28px
+
+    +screen-down(lg)
+        margin-right: 17px
+
+    +screen-down(sm)
+        margin-bottom: 15px
+
+    &:last-child
+        margin-right: 0
+
+.MenuLink
+    text-transform: uppercase
+    color: $text-grey
+
+    +screen-down(md)
+        +fs(15px)
+
+    &:hover
+        color: $accent

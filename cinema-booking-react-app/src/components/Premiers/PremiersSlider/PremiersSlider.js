@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Image} from "react-bootstrap";
-
 import classes from './PremiersSlider.module.sass'
 import {Link} from "react-router-dom";
 
@@ -35,6 +34,7 @@ const PremiersSlider = ({slides, currentSlideIndex, setCurrentSlideIndex}) => {
                 return (
                     <SwiperSlide className={classes.Premier} key={element.id}>
                         <Image src={element.imgUrl} className={classes.PremierImage} alt="movie image" fluid/>
+
                         <div className={classes.PremierDescription}>
                             <Link to={`/movies/${element.id}`}>
                                 <p>{element.genres}</p>

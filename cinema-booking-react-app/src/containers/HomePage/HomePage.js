@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import classes from './HomePage.module.sass'
-import PremiersSlider from "Components/Premiers/PremiersSlider/PremiersSlider";
+import PremiersSlider from "components/Premiers/PremiersSlider/PremiersSlider";
 import SliderNavigationButtons
-    from "Components/Premiers/PremiersSlider/SliderNavigationButtons/SliderNavigationButtons";
-import SliderNavigation from "Components/Premiers/PremiersSlider/SliderNavigation/SliderNavigation";
-import {useAppContext} from "context/AppContext";
+    from "components/Premiers/PremiersSlider/SliderNavigationButtons/SliderNavigationButtons";
+import SliderNavigation from "components/Premiers/PremiersSlider/SliderNavigation/SliderNavigation";
+import {useAppContext} from "context/GlobalContext";
 import TheatersService from "../../api/TheatersService";
 
 const theatersService = new TheatersService();

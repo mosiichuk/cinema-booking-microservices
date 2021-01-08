@@ -1,19 +1,25 @@
 import React, {useState} from 'react';
-import logo from 'Assets/icons/logo.png';
-import profile from 'Assets/icons/profile.png';
+import logo from 'assets/icons/logo.png';
+import profile from 'assets/icons/profile.png';
 import {Col, Container, Row} from "react-bootstrap";
 import classes from './Navbar.module.sass';
-import {Link} from "react-router-dom";
-import LocationSelector from "Components/Navbar/LocationSelector/LocationSelector";
-import AuthenticationOptions from "Components/Navbar/AuthenticationOptions/AuthenticationOptions";
-import {useAppContext, useAppDispatch} from "context/AppContext";
-import types from 'context/types';
+import LocationSelector from "components/Navbar/LocationSelector/LocationSelector";
+import AuthenticationOptions from "components/Navbar/AuthenticationOptions/AuthenticationOptions";
+import {useAppContext, useAppDispatch} from "context/GlobalContext";
+import types from 'context/contextActions';
+import Navigation from "./Navigation/Navigation";
+import Modal from "../Modal/Modal";
 
 const Navbar = () => {
-    const [openAuthOptions, setOpenAuthOptions] = useState(false);
-    const [state, dispatch] = useAppContext();
+    const [isOpenedAuthOptions, setIsOpenedAuthOptions] = useState(false);
+    const [state] = useAppContext();
 
-    const closeAuthOptionsPopup = () => setOpenAuthOptions(!openAuthOptions);
+    const toggleAuthOptionsPopup = () => {
+        console.log('BEFORE ' + isOpenedAuthOptions)
+        setIsOpenedAuthOptions(!isOpenedAuthOptions);
+    }
+
+    console.log('AFTER ' + isOpenedAuthOptions)
 
     return (
         <>
@@ -25,29 +31,12 @@ const Navbar = () => {
                         </Col>
 
                         <Col className="col-12 col-sm-7 col-xl-8">
-                            <ul className="menu d-flex justify-content-center justify-content-xl-start">
-                                <li className={classes.MenuItem}>
-                                    <Link to="/" className={classes.MenuLink}>
-                                        Now on screens
-                                    </Link>
-                                </li>
-
-                                <li className={classes.MenuItem}>
-                                    <Link to="/coming-soon" className={classes.MenuLink}>
-                                        Coming soon
-                                    </Link>
-                                </li>
-
-                                <li className={classes.MenuItem}>
-                                    <Link to="/contact" className={classes.MenuLink}>
-                                        Contact us
-                                    </Link>
-                                </li>
-                            </ul>
+                            <Navigation/>
                         </Col>
 
-                        <Col
-                            className="col-12 col-sm-4 col-xl-3 d-flex justify-content-center justify-content-sm-start justify-content-xl-start">
+                        <Col className="col-12 col-sm-4 col-xl-3 d-flex justify-content-center
+                            justify-content-sm-start justify-content-xl-start">
+
                             <div className="account d-flex">
                                 <div className={classes.NavbarUserActionItems}>
                                     <LocationSelector/>
@@ -55,9 +44,10 @@ const Navbar = () => {
 
                                 <div className={classes.NavbarUserActionItems}>
                                     <img src={profile} className={classes.NavbarUserActionItems} alt="Profile icon"/>
+
                                     {state.userData.token
                                         ? <LogoutButton/>
-                                        : <LoginButton closeAuthOptionsPopup={closeAuthOptionsPopup}/>
+                                        : <LoginButton showAuthOptionsPopup={toggleAuthOptionsPopup}/>
                                     }
                                 </div>
                             </div>
@@ -66,15 +56,17 @@ const Navbar = () => {
                 </Container>
             </div>
 
-            {!openAuthOptions || <AuthenticationOptions closeAuthOptionsPopup={closeAuthOptionsPopup}/>}
+            <Modal isOpened={isOpenedAuthOptions}>
+                <AuthenticationOptions closeAuthOptionsPopup={toggleAuthOptionsPopup}/>
+            </Modal>
         </>
     );
 };
 
-const LoginButton = ({closeAuthOptionsPopup}) => {
+const LoginButton = ({showAuthOptionsPopup}) => {
 
     return (
-        <button className="account__link" onClick={closeAuthOptionsPopup}>
+        <button onClick={showAuthOptionsPopup}>
             Login
         </button>
     );
@@ -84,7 +76,7 @@ const LogoutButton = () => {
     const dispatch = useAppDispatch();
 
     return (
-        <button className="account__link" onClick={() => dispatch({type: types.CLEAR_USER_DATA})}>
+        <button onClick={() => dispatch({type: types.CLEAR_USER_DATA})}>
             Logout
         </button>
     );

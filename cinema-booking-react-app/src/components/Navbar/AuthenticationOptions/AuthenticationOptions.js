@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import authOptionsBg from 'Assets/img/login-bg.png';
+import authOptionsBg from 'assets/img/login-bg.png';
 import classes from './AuthenticationOptions.module.sass';
-import types from 'context/types';
-import {useAppContext, useAppDispatch, useAppState} from "context/AppContext";
+import types from 'context/contextActions';
+import {useAppContext} from "context/GlobalContext";
 import UsersService from "../../../api/UsersService";
 
 const forms = {
@@ -13,7 +13,7 @@ const forms = {
 const usersService = new UsersService();
 
 const AuthenticationOptions = ({closeAuthOptionsPopup}) => {
-    const [shownForm, setShownForm] = useState(forms.LOGIN);
+    const [currentForm, setCurrentForm] = useState(forms.LOGIN);
 
     const formComponentsMap = new Map([
         [forms.LOGIN, <LoginForm closeAuthOptionsPopup={closeAuthOptionsPopup}/>],
@@ -21,33 +21,24 @@ const AuthenticationOptions = ({closeAuthOptionsPopup}) => {
     ]);
 
     return (
-        <>
-            <div className={classes.Backdrop} onClick={closeAuthOptionsPopup}>
+        <div className={classes.LoginOptions}>
+            <img src={authOptionsBg} className="d-none d-xl-block" alt="Background"/>
 
-            </div>
-
-            <div className={classes.Popup}>
-                <div className={classes.LoginOptions}>
-                    <img src={authOptionsBg} className="d-none d-xl-block" alt="Background"/>
-
-                    <div className={classes.FormsContainer}>
-
-                        <div className={`${classes.FormSwitcher} d-flex justify-content-end`}>
-                            <p className={shownForm === forms.LOGIN ? classes.FormSwitcherActive : ''}
-                               onClick={() => setShownForm(forms.LOGIN)}>
-                                Login
-                            </p>
-                            <p className={shownForm === forms.SIGN_UP ? classes.FormSwitcherActive : ''}
-                               onClick={() => setShownForm(forms.SIGN_UP)}>
-                                Sign up
-                            </p>
-                        </div>
-
-                        {formComponentsMap.get(shownForm)}
-                    </div>
+            <div className={classes.FormsContainer}>
+                <div className={`${classes.FormSwitcher} d-flex justify-content-end`}>
+                    <p className={currentForm === forms.LOGIN ? classes.FormSwitcherActive : ''}
+                       onClick={() => setCurrentForm(forms.LOGIN)}>
+                        Login
+                    </p>
+                    <p className={currentForm === forms.SIGN_UP ? classes.FormSwitcherActive : ''}
+                       onClick={() => setCurrentForm(forms.SIGN_UP)}>
+                        Sign up
+                    </p>
                 </div>
+
+                {formComponentsMap.get(currentForm)}
             </div>
-        </>
+        </div>
     );
 };
 
@@ -67,21 +58,21 @@ const LoginForm = ({closeAuthOptionsPopup}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const [headers] = await usersService.login(userSignUpData);
+        await usersService.login(userSignUpData)
+            .then(headers => {
+                dispatch({
+                    type: types.SET_USER,
+                    payload: {
+                        token: headers.token,
+                        user: headers.user
+                    }
+                });
 
-            dispatch({
-                type: types.SET_USER,
-                payload: {
-                    token: 'Bearer ' + headers.get('token'),
-                    userId: headers.get('userid')
-                }
+                closeAuthOptionsPopup();
+            })
+            .catch(error => {
+                setMessages({success: '', error: 'Something went wrong. Please try again.'})
             });
-
-            closeAuthOptionsPopup();
-        } catch (error) {
-            setMessages({success: '', error: 'Something went wrong. Please try again.'})
-        }
     }
 
     const changeUserEmail = (event) => {
@@ -138,7 +129,7 @@ const SignupForm = () => {
             .then(data =>
                     setMessages({
                         error: '',
-                        success: `<span>${data.json().name}</span>, your account was successfully created. Please proceed with login.`
+                        success: `<span>${data.name}</span>, your account was successfully created. Please proceed with login.`
                     }),
                 error => setMessages({success: '', error: 'Something went wrong. Please try again.'}),
             );

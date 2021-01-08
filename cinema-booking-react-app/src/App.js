@@ -1,38 +1,31 @@
 import React from 'react';
-import {Route, Switch, BrowserRouter} from "react-router-dom";
+import {Route, useLocation} from "react-router-dom";
 import HomePage from "./containers/HomePage/HomePage";
-import Navbar from "Components/Navbar/Navbar";
+import Navbar from "components/Navbar/Navbar";
 import ComingSoonPage from "containers/CommingSoonPage/ComingSoonPage";
 import MovieDetails from "containers/MovieDetails/MovieDetails";
-import {AppContextProvider} from "context/AppContext";
-import Footer from "Components/Footer/Footer";
+import {GlobalContextProvider} from "context/GlobalContext";
+import Footer from "components/Footer/Footer";
 import OrderTicketsSection from "./containers/OrderTicketsSection/OrderTicketsSection";
+import OrderConfirmation from "./containers/OrderConfirmation/OrderConfirmation";
 
 function App() {
+    const location = useLocation();
 
     return (
-        <BrowserRouter>
-            <AppContextProvider>
-                <Navbar/>
+        <GlobalContextProvider>
+            <Navbar/>
 
-                <Switch>
-                    <Route exact path="/">
-                        <HomePage/>
-                    </Route>
-                    <Route exact path="/coming-soon">
-                        <ComingSoonPage/>
-                    </Route>
-                    <Route exact path="/movies/:id">
-                        <MovieDetails/>
-                    </Route>
-                    <Route exact path="/showings/:showingId">
-                        <OrderTicketsSection/>
-                    </Route>
-                </Switch>
+            <Route path="/">
+                <Route exact path="/" component={HomePage}/>
+                <Route exact path="/coming-soon" component={ComingSoonPage}/>
+                <Route exact path="/movies/:id" component={MovieDetails}/>
+                <Route exact path="/showings/:showingId" component={OrderTicketsSection}/>
+                <Route exact path="/orderConfirmation/:orderId" component={OrderConfirmation}/>
+            </Route>
 
-                <Footer/>
-            </AppContextProvider>
-        </BrowserRouter>
+            {location.pathname !== '/' && <Footer/>}
+        </GlobalContextProvider>
     );
 }
 

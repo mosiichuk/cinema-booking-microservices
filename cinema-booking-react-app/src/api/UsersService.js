@@ -1,16 +1,14 @@
-import ApiService from "./ApiService";
-
-const apiService = new ApiService();
+import axios from './api';
 
 export default class UsersService {
 
     async login(data = {}) {
-        const response = await apiService.doPost('/users/login', data);
-
-        return [response.headers];
+        return  await axios.post('/users/login', data)
+            .then(response => response.headers);
     }
 
     async createUser(data = {}) {
-        return await apiService.doPost('/users', data);
+        return await axios.post('/users', data)
+            .then(response => response.data);
     }
 }

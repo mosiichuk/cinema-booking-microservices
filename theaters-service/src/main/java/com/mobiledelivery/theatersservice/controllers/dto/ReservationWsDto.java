@@ -13,12 +13,23 @@ public class ReservationWsDto implements Serializable {
 
     private long id;
 
+    private long rowNumber;
+
+    private long seatNumber;
+
+    private long price;
+
+    private long salon;
+
     @NotNull
     private long seatId;
+
     @NotNull
     private long showingId;
+
     @NotNull
     private boolean reserved;
+
     @NotNull
     private String userId;
 }

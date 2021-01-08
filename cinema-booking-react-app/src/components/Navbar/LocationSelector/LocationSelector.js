@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import classes from './LocationSelector.module.sass';
-import location from 'Assets/icons/location.png';
-import {useAppContext} from 'context/AppContext';
-import types from 'context/types';
+import location from 'assets/icons/location.png';
+import {useAppContext} from 'context/GlobalContext';
+import types from 'context/contextActions';
 import TheatersService from "../../../api/TheatersService";
 
 const theatersService = new TheatersService();
@@ -17,14 +17,15 @@ const LocationSelector = () => {
     }, []);
 
     const changeCurrentTheater = ({target}) => {
-        const index = target.selectedIndex;
-        const optionElement = target.childNodes[index]
-        const theater = {
-            id: optionElement.getAttribute('data-id'),
-            name: target.value
-        };
+        const optionElement = target.childNodes[target.selectedIndex]
 
-        dispatch({type: types.SET_THEATER, payload: theater});
+        dispatch({
+            type: types.SET_THEATER,
+            payload: {
+                id: optionElement.getAttribute('data-id'),
+                name: target.value
+            }
+        });
     }
 
     return (

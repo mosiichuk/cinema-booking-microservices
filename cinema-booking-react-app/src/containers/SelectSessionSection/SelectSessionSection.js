@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useAppContext} from "context/AppContext";
+import {useAppContext} from "context/GlobalContext";
 import classes from './SelectSessionSection.module.sass';
 import {Link} from "react-router-dom";
 import TheatersService from "../../api/TheatersService";

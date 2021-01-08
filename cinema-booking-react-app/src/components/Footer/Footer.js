@@ -1,16 +1,12 @@
 import React from 'react';
 import {useLocation} from 'react-router-dom';
-import instagram from 'Assets/icons/instagram.png';
-import facebook from 'Assets/icons/facebook.png';
-import twitter from 'Assets/icons/twitter.png';
-import logo from 'Assets/icons/logo.png';
+import instagram from 'assets/icons/instagram.png';
+import facebook from 'assets/icons/facebook.png';
+import twitter from 'assets/icons/twitter.png';
+import logo from 'assets/icons/logo.png';
 import classes from './Footer.module.sass';
 
 const Footer = () => {
-    const location = useLocation();
-
-    if (location && location.pathname === '/')
-        return null;
 
     return (
         <footer id="footer" className={classes.Footer}>
