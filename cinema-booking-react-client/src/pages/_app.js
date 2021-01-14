@@ -96,6 +96,11 @@ function App({Component, pageProps}) {
                 font-size: ${theme.typography.body1};
                 letter-spacing: 0.05em;
               }
+              
+              .img-fluid {
+                width: 100%;
+                height: auto;
+              }
             `}</style>
         </>
     )

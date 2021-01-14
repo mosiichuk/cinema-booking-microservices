@@ -3,7 +3,7 @@ import React from 'react';
 const ComingSoonPage = () => {
     return (
         <div>
-            <p>Comming soon</p>
+            <p>Coming soon</p>
         </div>
     );
 };

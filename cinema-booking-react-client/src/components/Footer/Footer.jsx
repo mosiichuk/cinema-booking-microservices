@@ -1,5 +1,6 @@
 import React from 'react';
-import {Grid, Hidden, makeStyles, useTheme} from "@material-ui/core";
+import {Grid, Hidden, makeStyles} from "@material-ui/core";
+import Logo from "components/Logo/Logo";
 
 const useStyles = makeStyles((theme) => ({
     footer: {
@@ -27,7 +28,7 @@ const Footer = () => {
     return (
         <footer id="footer" className={classes.footer}>
             <Grid container justify='center' alignItems='center'>
-                <Grid item xs={6} sm={3} md={2}>
+                <Grid item xs={6} sm={4} md={3}>
                     <p className="rights__text">
                         all rights reserved
                     </p>
@@ -36,14 +37,13 @@ const Footer = () => {
                     </p>
                 </Grid>
 
-                <Hidden mdDown>
-                    <Grid item xs={2} className={classes.logo}>
-                        <img src='/icons/logo.png' alt="Logo"/>
+                <Hidden xsDown>
+                    <Grid item xs={2}className={classes.logo}>
+                        <Logo xsDown/>
                     </Grid>
                 </Hidden>
 
-
-                <Grid item xs={6} sm={3} md={2} className={classes.socialMedia}>
+                <Grid item xs={6} sm={4} md={3} className={classes.socialMedia}>
                     <img src='/icons/instagram.png' alt="Instagram logo"/>
                     <img src='/icons/facebook.png' alt="Facebook logo"/>
                     <img src='/icons/twitter.png' alt="Twitter logo"/>
