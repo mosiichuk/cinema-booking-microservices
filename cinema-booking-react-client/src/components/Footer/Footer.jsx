@@ -38,7 +38,7 @@ const Footer = () => {
                 </Grid>
 
                 <Hidden xsDown>
-                    <Grid item xs={2}className={classes.logo}>
+                    <Grid item xs={2} className={classes.logo}>
                         <Logo xsDown/>
                     </Grid>
                 </Hidden>

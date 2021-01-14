@@ -6,15 +6,16 @@ import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
     button: {
         backgroundColor: 'transparent',
-        color: theme.colors.textGrey,
+        color: theme.colors.textWhite,
         fontSize: 18,
-        padding: 0
+        padding: 0,
+        textTransform: 'uppercase',
     },
     icon: {
         color: theme.colors.accent,
-        margin: '0 5px 0 0',
+        margin: '0 15px 0 0',
         width: 25,
-        height: 25,
+        height: 30,
     }
 }));
 
@@ -26,14 +27,6 @@ const LoginButton = () => {
             <PermIdentityIcon className={classes.icon}/>
             <p>Login</p>
         </IconButton>
-        // <Button
-        //     variant="contained"
-        //     color="default"
-        //     className={classes.button}
-        //     startIcon={<PermIdentityIcon className={classes.icon}/>}
-        // >
-        //     Login
-        // </Button>
     );
 };
 

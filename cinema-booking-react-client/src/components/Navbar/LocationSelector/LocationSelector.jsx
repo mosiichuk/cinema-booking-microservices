@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {FormControl, makeStyles, MenuItem, Select} from "@material-ui/core";
+import {FormControl, IconButton, makeStyles, MenuItem, Select} from "@material-ui/core";
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const useStyles = makeStyles((theme) => ({
     select: {
-        color: theme.colors.textGrey,
+        color: theme.colors.textWhite,
         fontSize: 18,
+        textTransform: 'uppercase',
         '&::before, &::after': {
             borderBottom: 'none',
         },
@@ -15,11 +16,15 @@ const useStyles = makeStyles((theme) => ({
     },
     locationIcon: {
         color: theme.colors.accent,
-        margin: '0 5px 0 0',
-        width: 20,
-        height: 20,
-        transform: 'translateY(25%)'
-    }
+        margin: '0 15px 0 0',
+        width: 25,
+        height: 30,
+    },
+    selectIcon: {
+        color: theme.colors.textWhite,
+        top: '50%',
+        transform: 'translateY(-50%)'
+    },
 }));
 
 const LocationSelector = () => {
@@ -39,6 +44,9 @@ const LocationSelector = () => {
                     value={age}
                     onChange={handleChange}
                     className={classes.select}
+                    classes={{
+                        icon: classes.selectIcon
+                    }}
                 >
                     <MenuItem value={1}>Kyiv</MenuItem>
                     <MenuItem value={2}>Lviv</MenuItem>
