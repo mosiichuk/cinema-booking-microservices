@@ -17,6 +17,15 @@ const theme = createMuiTheme({
             medium: '#0A0A0A',
             light: '#131313',
         }
+    },
+    overrides: {
+        MuiSelect: {
+            select: {
+                "&:focus": {
+                    backgroundColor: "$labelcolor"
+                }
+            }
+        },
     }
 });
 
